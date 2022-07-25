@@ -1,0 +1,8 @@
+0:0:0:0:0:0:0:1 - - [25/Jul/2022:12:00:52 +0300] "GET /repair-agency HTTP/1.1" 302 - http-bio-8081-exec-1 0
+0:0:0:0:0:0:0:1 - - [25/Jul/2022:12:00:53 +0300] "GET /repair-agency/ HTTP/1.1" 200 537 http-bio-8081-exec-2 541
+0:0:0:0:0:0:0:1 - - [25/Jul/2022:12:00:53 +0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8081-exec-3 0
+0:0:0:0:0:0:0:1 - - [25/Jul/2022:12:02:51 +0300] "GET /repair-agency HTTP/1.1" 302 - http-bio-9090-exec-1 0
+0:0:0:0:0:0:0:1 - - [25/Jul/2022:12:02:51 +0300] "GET /repair-agency/ HTTP/1.1" 200 537 http-bio-9090-exec-2 28
+0:0:0:0:0:0:0:1 - - [25/Jul/2022:12:02:55 +0300] "GET /home/querytest?cityname=Xintai HTTP/1.1" 404 - http-bio-9090-exec-3 0
+0:0:0:0:0:0:0:1 - - [25/Jul/2022:12:03:36 +0300] "GET /home/querytest?cityname=Xintai HTTP/1.1" 404 - http-bio-9090-exec-4 0
+0:0:0:0:0:0:0:1 - - [25/Jul/2022:12:03:43 +0300] "GET /repair-agency/querytest?cityname=Xintai HTTP/1.1" 200 200 http-bio-9090-exec-5 403
