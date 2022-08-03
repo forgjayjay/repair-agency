@@ -1,13 +1,11 @@
-package com.servlet_project;
-
+package com.servlet_project.user.standard_user;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
-
-public class main_servlet extends HttpServlet {
+public class user_page extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
         throws ServletException, IOException {
@@ -27,8 +25,10 @@ public class main_servlet extends HttpServlet {
         PrintWriter out = response.getWriter();  
             
         String n=request.getParameter("username");  
-        out.print("Welcome "+n);  
-            
+        out.print("Welcome, user " + n);  
+        
+        
+
         out.close();  
     }  
 }

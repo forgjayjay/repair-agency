@@ -29,11 +29,11 @@ public class Registration extends HttpServlet{
     String p=request.getParameter("userpass");  
     RegistrationDao validator = new RegistrationDao();
     if(validator.insert(n, p)){  
-        //out.print("Account successfully created, you will be redirected to login page soon");  
-        // RequestDispatcher rd=request.getRequestDispatcher("login_page.jsp");  
-        // rd.forward(request,response);  
+        out.print("Account successfully created, you will be redirected to login page soon");  
+        RequestDispatcher rd=request.getRequestDispatcher("login_page.jsp");  
+        rd.forward(request,response);  
         
-        response.sendRedirect(request.getContextPath() + "/Login");
+        //response.sendRedirect(request.getContextPath() + "/Login");
     }  
     else{  
         out.print("Sorry username already exists");  

@@ -6,22 +6,39 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
 public class LoginDao {  
-public boolean validate(String name,String pass){  
-    boolean status=false;  
-    try(Connection con=DriverManager.getConnection(getUrlToDB())  ){  
+    public boolean validate(String name,String pass){  
+        boolean status=false;  
+        try(Connection con=DriverManager.getConnection(getUrlToDB())  ){  
 
-    PreparedStatement ps=con.prepareStatement(
-        "select * from users where login = ? and passwrd = ?"
-    );  
-    ps.setString(1,name);  
-    ps.setString(2,pass);  
-        
-    ResultSet rs=ps.executeQuery();  
-    status=rs.next();  
+        PreparedStatement ps=con.prepareStatement(
+            "select * from users where login = ? and passwrd = ?"
+        );  
+        ps.setString(1,name);  
+        ps.setString(2,pass);  
             
-    }catch(Exception e){System.out.println(e);}  
-    return status;  
-    }  
+        ResultSet rs=ps.executeQuery();  
+        status=rs.next();  
+                
+        }catch(Exception e){System.out.println(e);}  
+        return status;  
+    } 
+
+    public String userType(String name){
+        String type = "";
+        try(Connection con=DriverManager.getConnection(getUrlToDB())  ){  
+
+            PreparedStatement ps=con.prepareStatement(
+                "select * from users where login = ?"
+            ); 
+            
+            ps.setString(1,name);  
+            ResultSet rs=ps.executeQuery(); 
+            while(rs.next()){
+                type = rs.getString("acc_type");
+            }
+        } catch(Exception e){System.out.println(e);}  
+        return type;
+    }
 
     private String getUrlToDB() {
         String url = null;

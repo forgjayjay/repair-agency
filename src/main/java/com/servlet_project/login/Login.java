@@ -22,17 +22,20 @@ public class Login extends HttpServlet{
     
     public void doPost(HttpServletRequest request, HttpServletResponse response)  
         throws ServletException, IOException {  
-  
+    
     response.setContentType("text/html");  
     PrintWriter out = response.getWriter();  
-          
+    
+
+
     String n=request.getParameter("username");  
     String p=request.getParameter("userpass");  
     LoginDao validator = new LoginDao();
-    if(validator.validate(n, p)){  
-        // RequestDispatcher rd=request.getRequestDispatcher("Welcome");  
-        // rd.forward(request,response);  
-        response.sendRedirect(request.getContextPath() + "/Welcome?username="+n);
+    if(validator.validate(n, p)){ 
+        String redirectStr = validator.userType(n);
+        RequestDispatcher rd=request.getRequestDispatcher(redirectStr + "_page");  
+        rd.forward(request,response);  
+        //response.sendRedirect(request.getContextPath() + "/Welcome?username="+n);
     }  
     else{  
         out.print("Sorry username or password error");  

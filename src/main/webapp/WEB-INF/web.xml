@@ -28,6 +28,30 @@
     <servlet-name>Welcome</servlet-name>
     <url-pattern>/Welcome</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>admin_page</servlet-name>
+    <servlet-class>com.servlet_project.user.admin.admin_page</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>admin_page</servlet-name>
+    <url-pattern>/admin_page</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>craftsman_page</servlet-name>
+    <servlet-class>com.servlet_project.user.craftsman.craftsman_page</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>craftsman_page</servlet-name>
+    <url-pattern>/craftsman_page</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>user_page</servlet-name>
+    <servlet-class>com.servlet_project.user.standard_user.user_page</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>user_page</servlet-name>
+    <url-pattern>/user_page</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
     <welcome-file>login_page.jsp</welcome-file>
   </welcome-file-list>
