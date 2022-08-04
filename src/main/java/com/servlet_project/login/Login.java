@@ -6,7 +6,12 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;  
 import javax.servlet.http.HttpServlet;  
 import javax.servlet.http.HttpServletRequest;  
-import javax.servlet.http.HttpServletResponse; 
+import javax.servlet.http.HttpServletResponse;
+
+/*
+*       The Login page servlet 
+*/
+
 public class Login extends HttpServlet{
     public void doGet(HttpServletRequest request, HttpServletResponse response)  
         throws ServletException, IOException {  
@@ -35,7 +40,6 @@ public class Login extends HttpServlet{
         String redirectStr = validator.userType(n);
         RequestDispatcher rd=request.getRequestDispatcher(redirectStr + "_page");  
         rd.forward(request,response);  
-        //response.sendRedirect(request.getContextPath() + "/Welcome?username="+n);
     }  
     else{  
         out.print("Sorry username or password error");  
