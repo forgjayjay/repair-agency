@@ -11,5 +11,5 @@ public class constants {
 	public static final String SETTINGS_FILE = "dbconnection.properties";
 	public static final String VALIDATE_USER = "select * from users where login = ? and passwrd = ?";
 	public static final String FIND_USER = "select * from users where login = ?";
-	public static final String INSERT_USER = "insert into users values (0, ? , ? )";
+	public static final String INSERT_USER = "insert into users values (0, ? , ?, 'user')";
 }
