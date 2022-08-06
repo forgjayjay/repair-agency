@@ -7,7 +7,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
-public class admin_page extends HttpServlet {
+public class intermission_page extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
         throws ServletException, IOException {
@@ -25,15 +25,17 @@ public class admin_page extends HttpServlet {
 
         response.setContentType("text/html");  
         PrintWriter out = response.getWriter();  
-       
-        
-        //String n=request.getParameter("username");  
-        out.print("Welcome, to admin page");
-        RequestDispatcher rd=request.getRequestDispatcher("admin_page_form.jsp");  
-        rd.include(request,response);  
-
-        
-        out.close();  
+        AdminDao validator = new AdminDao();
+        String n=request.getParameter("username");
+        if(request.getParameter("userpass")==null){
+            if(!validator.insertManager(n)) out.println("Sorry, something went wrong");
+        }else {
+            String p=request.getParameter("userpass"); 
+            if(!validator.insertManager(n,p)) out.println("Sorry, something went wrong");
+        }
+        RequestDispatcher rd=request.getRequestDispatcher("admin_page");  
+        rd.forward(request,response); 
+        out.close(); 
     }  
 }
 

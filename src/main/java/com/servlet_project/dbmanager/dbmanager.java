@@ -27,7 +27,7 @@ public class dbmanager {
 		return instance;
 	}
 
-    public boolean insert(String name,String pass){  
+    public boolean insertUser(String name,String pass){  
         boolean status=false; 
         int i = 0;
 
@@ -42,6 +42,39 @@ public class dbmanager {
             }
             ps = con.prepareStatement(
                 constants.INSERT_USER
+            );  
+            ps.setString(1,name);  
+            ps.setString(2,pass);  
+        
+            i += ps.executeUpdate();  
+            status = i > 0;
+            }catch(Exception e){ System.out.println(e); } 
+        return status;  
+    }
+    public boolean insertManager(String name,String pass){  
+        boolean status=false; 
+        int i = 0;
+
+        try(
+            Connection con = DriverManager.getConnection(getUrlToDB());
+        ){  
+            PreparedStatement ps = con.prepareStatement(constants.FIND_USER);
+            ps.setString(1,name);
+            ResultSet rs = ps.executeQuery();  
+            if( status=rs.next()){
+                ps = con.prepareStatement(constants.UPDATE_USER);
+                ps.setString(1, "acc_type = 'manager'"); 
+                ps.setString(2,name); 
+                ps.executeUpdate(); 
+                i += ps.executeUpdate();  
+                status = i > 0;
+                ps.close();
+                return status;
+            } else if(pass.equals("")){
+                return false;
+            }
+            ps = con.prepareStatement(
+                constants.INSERT_MNGR
             );  
             ps.setString(1,name);  
             ps.setString(2,pass);  

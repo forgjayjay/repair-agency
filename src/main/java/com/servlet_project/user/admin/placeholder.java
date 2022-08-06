@@ -7,7 +7,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
-public class admin_page extends HttpServlet {
+public class placeholder extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
         throws ServletException, IOException {
@@ -25,15 +25,19 @@ public class admin_page extends HttpServlet {
 
         response.setContentType("text/html");  
         PrintWriter out = response.getWriter();  
-       
         
-        //String n=request.getParameter("username");  
-        out.print("Welcome, to admin page");
-        RequestDispatcher rd=request.getRequestDispatcher("admin_page_form.jsp");  
-        rd.include(request,response);  
-
+        if(request.getParameter("manager").equals("add a manager")){
+            if(request.getParameter("newuser")!=null){
+                RequestDispatcher rd=request.getRequestDispatcher("manager_registration.jsp");  
+                rd.forward(request,response);
+            } else{
+                RequestDispatcher rd=request.getRequestDispatcher("manager_update.jsp");  
+                rd.forward(request,response);
+            }
+        }
         
-        out.close();  
+        
+        out.close(); 
     }  
 }
 

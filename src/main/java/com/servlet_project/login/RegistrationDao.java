@@ -10,6 +10,6 @@ import com.servlet_project.dbmanager.dbmanager;
 public class RegistrationDao {  
 public boolean insert(String name,String pass){  
         dbmanager dbm = dbmanager.getInstance();
-        return dbm.insert(name, pass);
+        return dbm.insertUser(name, pass);
     }
 }  
