@@ -73,6 +73,7 @@ public class dbmanager {
             } else if(pass.equals("")){
                 return false;
             }
+            ps.close();
             ps = con.prepareStatement(
                 constants.INSERT_MNGR
             );  
@@ -80,6 +81,55 @@ public class dbmanager {
             ps.setString(2,pass);  
         
             i += ps.executeUpdate();  
+            status = i > 0;
+            }catch(Exception e){ System.out.println(e); } 
+        return status;  
+    }
+
+    public boolean insertCraftsman(String login,String pass, String name){  
+        boolean status=false; 
+        int i = 0;
+        int newID = 0;
+        try(
+            Connection con = DriverManager.getConnection(getUrlToDB());
+        ){  
+            PreparedStatement ps = con.prepareStatement(constants.FIND_USER);
+            ps.setString(1,login);
+            ResultSet rs = ps.executeQuery();  
+            if( status=rs.next()){
+                newID = rs.getInt(1);
+                ps = con.prepareStatement(constants.UPDATE_USER);
+                ps.setString(1, "acc_type = 'craftsman'"); 
+                ps.setString(2,login); 
+                ps.executeUpdate(); 
+                ps = con.prepareStatement(constants.INSERT_INTO_CRFTSMN);
+                ps.setInt(1, newID);
+                ps.setString(2, name);
+                i += ps.executeUpdate();  
+                status = i > 0;
+                ps.close();
+                return status;
+            } else if(pass.equals("")){
+                return false;
+            }
+            ps.close();
+            ps = con.prepareStatement(
+                constants.INSERT_CRFTSMN
+            );  
+            ps.setString(1,login);  
+            ps.setString(2,pass);  
+            
+            i += ps.executeUpdate(); 
+            
+            ps = con.prepareStatement(constants.FIND_USER);
+            ps.setString(1,login);
+            rs = ps.executeQuery(); 
+            while(rs.next()){
+                newID = rs.getInt(1);
+            }
+            ps = con.prepareStatement(constants.INSERT_INTO_CRFTSMN);
+            ps.setInt(1, newID);
+            ps.setString(2, name);
             status = i > 0;
             }catch(Exception e){ System.out.println(e); } 
         return status;  

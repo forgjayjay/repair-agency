@@ -15,4 +15,6 @@ public class constants {
 
 	public static final String INSERT_USER = "insert into users values (0, ? , ?, 'user')";
 	public static final String INSERT_MNGR = "insert into users values (0, ? , ?, 'manager')";
+	public static final String INSERT_CRFTSMN = "insert into users values (0, ? , ?, 'craftsman')";
+	public static final String INSERT_INTO_CRFTSMN = "insert into craftsmen values (?, ?)";
 }

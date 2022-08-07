@@ -26,11 +26,20 @@ public class intermission_page extends HttpServlet {
         response.setContentType("text/html");  
         PrintWriter out = response.getWriter();  
         AdminDao validator = new AdminDao();
-        String n=request.getParameter("username");
-        if(request.getParameter("userpass")==null){
+
+        String l=request.getParameter("username");
+        String n=request.getParameter("name");
+        String p=request.getParameter("userpass"); 
+
+        if(request.getParameter("manager")==null){
+            if(request.getParameter("userpass")==null){
+                if(!validator.insertCraftsman(l, n)) out.println("Sorry, something went wrong");
+            }else {
+                if(!validator.insertCraftsman(l, p, n)) out.println("Sorry, something went wrong");
+            }
+        }else if(request.getParameter("userpass")==null){
             if(!validator.insertManager(n)) out.println("Sorry, something went wrong");
         }else {
-            String p=request.getParameter("userpass"); 
             if(!validator.insertManager(n,p)) out.println("Sorry, something went wrong");
         }
         RequestDispatcher rd=request.getRequestDispatcher("admin_page");  

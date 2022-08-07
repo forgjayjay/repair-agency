@@ -26,12 +26,20 @@ public class placeholder extends HttpServlet {
         response.setContentType("text/html");  
         PrintWriter out = response.getWriter();  
         
-        if(request.getParameter("manager").equals("add a manager")){
+        if(request.getParameter("manager") != null){
             if(request.getParameter("newuser")!=null){
                 RequestDispatcher rd=request.getRequestDispatcher("manager_registration.jsp");  
                 rd.forward(request,response);
             } else{
                 RequestDispatcher rd=request.getRequestDispatcher("manager_update.jsp");  
+                rd.forward(request,response);
+            }
+        } else{
+            if(request.getParameter("newuser")!=null){
+                RequestDispatcher rd=request.getRequestDispatcher("craftsman_registration.jsp");  
+                rd.forward(request,response);
+            } else{
+                RequestDispatcher rd=request.getRequestDispatcher("craftsman_update.jsp");  
                 rd.forward(request,response);
             }
         }
