@@ -229,7 +229,7 @@ public class dbmanager {
                 str += "Order number: " + Integer.toString(rs.getInt("id")) + "\n";
                 
                 str += "User: " + Integer.toString(rs.getInt("user_id"))+"\n";
-                if(rs.getInt("craftsman_id") == 2) str += " Craftsman: " + craftsman_unassigned+"\n";
+                if(rs.getInt("craftsman_id") == 1) str += " Craftsman: " + craftsman_unassigned+"\n";
                 else str += " Craftsman: " + Integer.toString(rs.getInt("craftsman_id"))+"\n";
                 
                 str += " Order status: " + rs.getString("order_status")+"\n";

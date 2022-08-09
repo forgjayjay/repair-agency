@@ -18,7 +18,7 @@ public class constants {
 	public static final String INSERT_CRFTSMN = "insert into users values (0, ? , ?, 'craftsman')";
 	public static final String INSERT_INTO_CRFTSMN = "insert into craftsmen values (?, ?)";
 
-	public static final String INSERT_NEW_ORDER = "insert into orders values (0, ?, 2, ?, ?)";
+	public static final String INSERT_NEW_ORDER = "insert into orders values (0, ?, 1, ?, ?)";
 	public static final String SHOW_ORDER = "select * from orders where user_id = ?";
 	public static final String PAID_STATUS = "payment successful";
 	public static final String UNPAID_STATUS = "waiting payment";
