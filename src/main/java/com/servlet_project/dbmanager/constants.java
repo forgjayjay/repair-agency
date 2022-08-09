@@ -1,8 +1,8 @@
 package com.servlet_project.dbmanager;
 
 /*
-*       A class to handle all the SQL statements to not flood
-*       the code with them, as well as providing an easier time
+*       A class to handle all the SQL statements and some other constants 
+*       to not flood the code with them, as well as providing an easier time
 *       with understanding what the code is supposed to do
 */
 
@@ -11,10 +11,19 @@ public class constants {
 	public static final String SETTINGS_FILE = "dbconnection.properties";
 	public static final String VALIDATE_USER = "select * from users where login = ? and passwrd = ?";
 	public static final String FIND_USER = "select * from users where login = ?";
-	public static final String UPDATE_USER = "update users set ? where login = ?";
+	public static final String UPDATE_USER = "update users set acc_type = ? where login = ?";
 
 	public static final String INSERT_USER = "insert into users values (0, ? , ?, 'user')";
 	public static final String INSERT_MNGR = "insert into users values (0, ? , ?, 'manager')";
 	public static final String INSERT_CRFTSMN = "insert into users values (0, ? , ?, 'craftsman')";
 	public static final String INSERT_INTO_CRFTSMN = "insert into craftsmen values (?, ?)";
+
+	public static final String INSERT_NEW_ORDER = "insert into orders values (0, ?, 2, ?, ?)";
+	public static final String SHOW_ORDER = "select * from orders where user_id = ?";
+	public static final String PAID_STATUS = "payment successful";
+	public static final String UNPAID_STATUS = "waiting payment";
+	public static final String ORDER_STATUS_ACCEPT = "order accepted";
+	public static final String ORDER_STATUS_WORKING = "order in process";
+	public static final String ORDER_STATUS_DONE = "order completed";
+
 }

@@ -3,7 +3,8 @@ import java.io.IOException;
 import java.io.PrintWriter;  
   
 import javax.servlet.RequestDispatcher;  
-import javax.servlet.ServletException;  
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;  
 import javax.servlet.http.HttpServletRequest;  
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +39,9 @@ public class Login extends HttpServlet{
     LoginDao validator = new LoginDao();
     if(validator.validate(n, p)){ 
         String redirectStr = validator.userType(n);
-        RequestDispatcher rd=request.getRequestDispatcher(redirectStr + "_page");  
+        RequestDispatcher rd=request.getRequestDispatcher(redirectStr + "_page"); 
+        Cookie cookie = new Cookie("login", n);
+        response.addCookie(cookie);
         rd.forward(request,response);  
     }  
     else{  

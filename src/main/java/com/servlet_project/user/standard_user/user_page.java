@@ -1,10 +1,12 @@
 package com.servlet_project.user.standard_user;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
+
 public class user_page extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -23,12 +25,25 @@ public class user_page extends HttpServlet {
 
         response.setContentType("text/html");  
         PrintWriter out = response.getWriter();  
-            
-        String n=request.getParameter("username");  
-        out.print("Welcome, user " + n);  
-        
-        
+        Cookie cookies[] = request.getCookies();
+        String n = null;
+        if(cookies!=null){
+            for(Cookie cookie : cookies ){
+                if(cookie.getName().equals("login")){
+                    n=cookie.getValue();
+                    break;
+                }
 
+            }
+        } else n=request.getParameter("username");  
+        
+        out.println("\n<h2>Welcome, to user page, " + n + "</h2>\n");
+        RequestDispatcher rd=request.getRequestDispatcher("user_page.jsp"); 
+        
+        rd.include(request,response);  
+
+        
         out.close();  
     }  
 }
+

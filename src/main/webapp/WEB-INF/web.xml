@@ -12,6 +12,7 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>Registration</servlet-name>
     <servlet-class>com.servlet_project.login.Registration</servlet-class>
@@ -20,6 +21,7 @@
     <servlet-name>Registration</servlet-name>
     <url-pattern>/Registration</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>Welcome</servlet-name>
     <servlet-class>com.servlet_project.main_servlet</servlet-class>
@@ -28,6 +30,7 @@
     <servlet-name>Welcome</servlet-name>
     <url-pattern>/Welcome</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>admin_page</servlet-name>
     <servlet-class>com.servlet_project.user.admin.admin_page</servlet-class>
@@ -36,6 +39,7 @@
     <servlet-name>admin_page</servlet-name>
     <url-pattern>/admin_page</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>intermission</servlet-name>
     <servlet-class>com.servlet_project.user.admin.intermission_page</servlet-class>
@@ -44,6 +48,7 @@
     <servlet-name>intermission</servlet-name>
     <url-pattern>/intermission</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>placeholder</servlet-name>
     <servlet-class>com.servlet_project.user.admin.placeholder</servlet-class>
@@ -52,6 +57,7 @@
     <servlet-name>placeholder</servlet-name>
     <url-pattern>/placeholder</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>manager_page</servlet-name>
     <servlet-class>com.servlet_project.user.manager.manager-page</servlet-class>
@@ -60,6 +66,7 @@
     <servlet-name>manager_page</servlet-name>
     <url-pattern>/manager_page</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>craftsman_page</servlet-name>
     <servlet-class>com.servlet_project.user.craftsman.craftsman_page</servlet-class>
@@ -68,6 +75,7 @@
     <servlet-name>craftsman_page</servlet-name>
     <url-pattern>/craftsman_page</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>user_page</servlet-name>
     <servlet-class>com.servlet_project.user.standard_user.user_page</servlet-class>
@@ -76,7 +84,24 @@
     <servlet-name>user_page</servlet-name>
     <url-pattern>/user_page</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>order_handler</servlet-name>
+    <servlet-class>com.servlet_project.user.standard_user.order_handler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>order_handler</servlet-name>
+    <url-pattern>/order_handler</url-pattern>
+  </servlet-mapping>
+  <!-- <servlet>
+    <servlet-name>admin_form</servlet-name>
+    <jsp-file>com.servlet_project.user.admin.admin_page_form</jsp-file>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>admin_form</servlet-name>
+      <url-pattern>/admin_page/form</url-pattern>   
+  </servlet-mapping> -->
+
   <welcome-file-list>
-    <welcome-file>login_page.jsp</welcome-file>
+    <welcome-file>Login</welcome-file>
   </welcome-file-list>
 </web-app> 

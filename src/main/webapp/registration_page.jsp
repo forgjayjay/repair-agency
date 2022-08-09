@@ -9,6 +9,6 @@
           <input type="password" name="userpass"/><br/><br/>  
           <input type="submit" value="Register"/>   
       </form>
-      <a href="login_page.jsp">Login into an existing account</a>
+      <a href="Login">Login into an existing account</a>
       </body>
 </html>

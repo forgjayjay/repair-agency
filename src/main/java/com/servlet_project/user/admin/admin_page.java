@@ -25,11 +25,21 @@ public class admin_page extends HttpServlet {
 
         response.setContentType("text/html");  
         PrintWriter out = response.getWriter();  
-       
+        Cookie cookies[] = request.getCookies();
+        String n = null;
+        if(cookies!=null){
+            for(Cookie cookie : cookies ){
+                if(cookie.getName().equals("login")){
+                    n=cookie.getValue();
+                    break;
+                }
+
+            }
+        } else n=request.getParameter("username");  
         
-        //String n=request.getParameter("username");  
-        out.print("Welcome, to admin page");
-        RequestDispatcher rd=request.getRequestDispatcher("admin_page_form.jsp");  
+        out.print("Welcome, to admin page, " + n);
+        RequestDispatcher rd=request.getRequestDispatcher("admin_page_form.jsp"); 
+        
         rd.include(request,response);  
 
         
