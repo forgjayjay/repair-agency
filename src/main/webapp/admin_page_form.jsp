@@ -9,5 +9,6 @@
             <input type="submit" name="manager" value="add a manager" /><br/><br/>
             <input type="submit" name="craftsman" value="add a craftsman" />
         </form>
+        <a href = "Logout">Logout</a>
     </body>
 </html>
