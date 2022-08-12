@@ -35,8 +35,10 @@ public class admin_page extends HttpServlet {
                 }
 
             }
-        } else n=request.getParameter("username");  
-        
+        } else response.sendRedirect(request.getContextPath()+ "/Login");  
+        if(n == null){
+            response.sendRedirect(request.getContextPath()+ "/Login"); 
+        }
         out.print("Welcome, to admin page, " + n);
         RequestDispatcher rd=request.getRequestDispatcher("admin_page_form.jsp"); 
         

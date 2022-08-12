@@ -35,7 +35,10 @@ public class user_page extends HttpServlet {
                 }
 
             }
-        } else n=request.getParameter("username");  
+        } else response.sendRedirect(request.getContextPath()+ "/Login");  
+        if(n == null){
+            response.sendRedirect(request.getContextPath()+ "/Login"); 
+        }
         
         out.println("\n<h2>Welcome, to user page, " + n + "</h2>\n");
         RequestDispatcher rd=request.getRequestDispatcher("user_page.jsp"); 

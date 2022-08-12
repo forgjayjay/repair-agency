@@ -25,7 +25,20 @@ public class placeholder extends HttpServlet {
 
         response.setContentType("text/html");  
         PrintWriter out = response.getWriter();  
-        
+        Cookie cookies[] = request.getCookies();
+        String w = null;
+        if(cookies!=null){
+            for(Cookie cookie : cookies ){
+                if(cookie.getName().equals("login")){
+                    w=cookie.getValue();
+                    break;
+                }
+
+            }
+        } else response.sendRedirect(request.getContextPath()+ "/Login");  
+        if(w == null){
+            response.sendRedirect(request.getContextPath()+ "/Login"); 
+        }
         if(request.getParameter("manager") != null){
             if(request.getParameter("newuser")!=null){
                 RequestDispatcher rd=request.getRequestDispatcher("manager_registration.jsp");  
