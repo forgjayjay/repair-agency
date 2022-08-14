@@ -5,3 +5,7 @@
 0:0:0:0:0:0:0:1 - - [14/Aug/2022:12:47:06 +0200] "POST /repair-agency/placeholder HTTP/1.1" 200 407 http-bio-9090-exec-5 40
 0:0:0:0:0:0:0:1 - - [14/Aug/2022:12:47:18 +0200] "POST /repair-agency/intermission HTTP/1.1" 200 514 http-bio-9090-exec-6 365
 0:0:0:0:0:0:0:1 - - [14/Aug/2022:12:47:21 +0200] "GET /repair-agency/Logout HTTP/1.1" 200 441 http-bio-9090-exec-7 10
+0:0:0:0:0:0:0:1 - - [14/Aug/2022:19:34:26 +0200] "GET /repair-agency HTTP/1.1" 302 - http-bio-9090-exec-1 0
+0:0:0:0:0:0:0:1 - - [14/Aug/2022:19:34:26 +0200] "GET /repair-agency/ HTTP/1.1" 200 441 http-bio-9090-exec-2 203
+0:0:0:0:0:0:0:1 - - [14/Aug/2022:19:34:36 +0200] "POST /repair-agency/Login HTTP/1.1" 200 514 http-bio-9090-exec-3 4254
+0:0:0:0:0:0:0:1 - - [14/Aug/2022:19:34:45 +0200] "GET /repair-agency/Logout HTTP/1.1" 200 441 http-bio-9090-exec-4 8
