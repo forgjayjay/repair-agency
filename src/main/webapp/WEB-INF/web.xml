@@ -108,7 +108,13 @@
       <servlet-name>admin_form</servlet-name>
       <url-pattern>/admin_page/form</url-pattern>   
   </servlet-mapping> -->
-
+  <context-param>
+        <param-name>log4j-config-location</param-name>
+        <param-value>WEB-INF/log4j.properties</param-value>
+    </context-param>
+    <listener>
+      <listener-class>com.servlet_project.logger_innit.ContextListener</listener-class>
+    </listener>
   <welcome-file-list>
     <welcome-file>Login</welcome-file>
   </welcome-file-list>
