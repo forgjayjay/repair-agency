@@ -104,7 +104,7 @@ public class dbmanager {
         return status;  
     }
     public boolean insertCraftsman(String login,String pass, String name){  
-        logger.debug("Run insert manager into database method");
+        logger.debug("Run insert craftsman into database method");
 
         boolean status=false; 
         int i = 0;
@@ -112,7 +112,7 @@ public class dbmanager {
         try(
             Connection con = DriverManager.getConnection(getUrlToDB());
         ){  
-            logger.debug("Looking if user already exists");
+            logger.debug("Looking if craftsman already exists");
             PreparedStatement ps = con.prepareStatement(constants.FIND_USER);
             ps.setString(1,login);
 
@@ -148,7 +148,7 @@ public class dbmanager {
 
             i += ps.executeUpdate(); 
            
-            logger.debug("Adding new user to craftsman list");
+            logger.debug("Adding new craftsman to craftsman list");
             ps = con.prepareStatement(constants.FIND_USER);
             ps.setString(1,login);
             rs = ps.executeQuery(); 
@@ -170,7 +170,7 @@ public class dbmanager {
         return status;  
     }
     public boolean insertOrder(String name){  
-        logger.debug("Run insert manager into database method");
+        logger.debug("Run insert order into database method");
 
         boolean status=false; 
         int i = 0;
@@ -202,7 +202,8 @@ public class dbmanager {
             } 
         return status;  
     }
-    public String showOrder(String name){  
+    public String showOrder(String name, String type){  
+
         logger.debug("Run show order");
         ResultSet rs = null;
         int userID = 0;
@@ -211,7 +212,7 @@ public class dbmanager {
         try(
             Connection con = DriverManager.getConnection(getUrlToDB());
         ){  
-            logger.debug("Looking for order");
+            logger.debug("Looking for orders");
             PreparedStatement ps = con.prepareStatement(constants.FIND_USER);
             ps.setString(1,name);
              rs = ps.executeQuery();  
@@ -219,12 +220,19 @@ public class dbmanager {
                 userID = rs.getInt(1);
             } else return "\n";
             ps.close();
+            String statement = "";
+            if(type.equals("all")){
+                statement = constants.SHOW_ALL_ORDERS;
+            }else {
+                statement = constants.SHOW_NOT_PAID_ORDER;
+            }
             ps = con.prepareStatement(
-                constants.SHOW_ORDER
+                statement
             );  
             ps.setInt(1, userID);
             
             rs = ps.executeQuery(); 
+            logger.debug("Displaying orders");
             while(rs.next()){
                 str += "Order number: " + Integer.toString(rs.getInt("id")) + "\n";
                 
@@ -241,6 +249,68 @@ public class dbmanager {
             }catch(Exception e){ logger.error("Error on insertCraftsman"); } 
         return str;  
     }
+    public String showCraftsmanOrder(String name){  
+        logger.debug("Run show craftsman order");
+        ResultSet rs = null;
+        int userID = 0;
+        String str = "";
+        try(
+            Connection con = DriverManager.getConnection(getUrlToDB());
+        ){  
+            logger.debug("Looking for orders");
+            PreparedStatement ps = con.prepareStatement(constants.FIND_USER);
+            ps.setString(1,name);
+             rs = ps.executeQuery();  
+            if( rs.next()){
+                userID = rs.getInt(1);
+            } else return "\n";
+            ps.close();
+            
+            ps = con.prepareStatement(
+                constants.SHOW_ORDER_CRFTSMN
+            );  
+            ps.setInt(1, userID);
+            
+            rs = ps.executeQuery(); 
+            logger.debug("Displaying orders");
+            while(rs.next()){
+                str += "Order number: " + Integer.toString(rs.getInt("id")) + "\n";
+                
+                str += "User: " + Integer.toString(rs.getInt("user_id"))+"\n";
+                
+                str += " Order status: " + rs.getString("order_status")+"\n";
+                
+                
+                str += " Payment status: " + rs.getString("payment_status") + "\n\n\n";
+            }
+            rs.first();
+            if(!rs.next()){
+                str = "No assigned orders are present";
+            }
+            rs.close();
+            }catch(Exception e){ logger.error("Error on insertCraftsman"); } 
+        return str;  
+    }
+    public boolean updateOrderStatus(String order_status, int id){  
+        logger.debug("Run update order status method");
+
+        boolean status=false; 
+        int i = 0;
+        
+        try(
+            Connection con = DriverManager.getConnection(getUrlToDB());
+        ){  
+            logger.debug("Looking order");
+            PreparedStatement ps = con.prepareStatement(constants.UPDATE_ORDER_STATUS);
+            ps.setString(1, order_status);
+            ps.setInt(2, id);
+            i += ps.executeUpdate();  
+            status = i > 0;
+            }catch(Exception e){ 
+                logger.error("Error on insertOrder"); 
+            } 
+        return status;  
+    }
     public String userType(String name){
         logger.debug("Run userType method");
         String type = "";
@@ -248,40 +318,43 @@ public class dbmanager {
             Connection con=DriverManager.getConnection(getUrlToDB());
             PreparedStatement ps=con.prepareStatement(constants.FIND_USER);
         ){  
+            logger.debug("Checking account type");
             ps.setString(1,name);  
             ResultSet rs=ps.executeQuery(); 
             while(rs.next()){
                 type = rs.getString("acc_type");
             }
-        } catch(Exception e){ System.out.println(e); }  
+        } catch(Exception e){ logger.debug("Error on userType"); }  
         return type;
     }
-    public boolean validate(String name,String pass){  
+    public boolean validate(String name,String pass){
+        logger.debug("Run validate method");  
         boolean status=false;  
         try(
             Connection con=DriverManager.getConnection(getUrlToDB());
             PreparedStatement ps=con.prepareStatement(constants.VALIDATE_USER);
         ){  
 
-          
+            logger.debug("Checking for user in database");
             ps.setString(1,name);  
             ps.setString(2,pass);  
                 
             ResultSet rs=ps.executeQuery();  
             status=rs.next();  
                 
-        }catch(Exception e){System.out.println(e);}  
+        }catch(Exception e){ logger.debug("Error on validation");}  
         return status;  
     } 
 
     private String getUrlToDB() {
         String url = null;
+        logger.debug("Acquiring url to database");
         try (InputStream in = new FileInputStream(constants.SETTINGS_FILE)) {
             Properties prop = new Properties();
             prop.load(in);
             url =prop.getProperty("connection.url");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.debug("Error on acquisition of url to database");
         }
         return url;
     }

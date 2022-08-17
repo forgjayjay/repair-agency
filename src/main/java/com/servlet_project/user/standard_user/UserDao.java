@@ -8,7 +8,12 @@ public class UserDao {
         return dbm.insertOrder(name);
     }
     public String showOrders(String name){
-        String str = dbm.showOrder(name);
+        String str = dbm.showOrder(name, "all");
+
+        return str;
+    }
+    public String showUnpaidOrders(String name){
+        String str = dbm.showOrder(name, "unpaid");
 
         return str;
     }

@@ -83,6 +83,14 @@
     <servlet-name>craftsman_page</servlet-name>
     <url-pattern>/craftsman_page</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>craftsman_order_handler</servlet-name>
+    <servlet-class>com.servlet_project.user.craftsman.craftsman_order_handler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>craftsman_order_handler</servlet-name>
+    <url-pattern>/craftsman_order_handler</url-pattern>
+  </servlet-mapping>
 
   <servlet>
     <servlet-name>user_page</servlet-name>
@@ -93,12 +101,12 @@
     <url-pattern>/user_page</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>order_handler</servlet-name>
-    <servlet-class>com.servlet_project.user.standard_user.order_handler</servlet-class>
+    <servlet-name>user_order_handler</servlet-name>
+    <servlet-class>com.servlet_project.user.standard_user.user_order_handler</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>order_handler</servlet-name>
-    <url-pattern>/order_handler</url-pattern>
+    <servlet-name>user_order_handler</servlet-name>
+    <url-pattern>/user_order_handler</url-pattern>
   </servlet-mapping>
   <!-- <servlet>
     <servlet-name>admin_form</servlet-name>

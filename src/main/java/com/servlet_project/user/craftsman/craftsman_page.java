@@ -15,7 +15,7 @@ public class craftsman_page extends HttpServlet {
         out.print("Please, login first");  
         RequestDispatcher rd=request.getRequestDispatcher("login_page.jsp");  
         rd.include(request,response);    
-              
+        
         out.close();      
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response)  
@@ -23,12 +23,28 @@ public class craftsman_page extends HttpServlet {
 
         response.setContentType("text/html");  
         PrintWriter out = response.getWriter();  
-            
-        String n=request.getParameter("username");  
-        out.print("Welcome, craftsman " + n);  
-        
-        
+        Cookie cookies[] = request.getCookies();
+        String n = null;
+        if(cookies!=null){
+            for(Cookie cookie : cookies ){
+                if(cookie.getName().equals("login")){
+                    n=cookie.getValue();
+                    break;
+                }
 
+            }
+        } else response.sendRedirect(request.getContextPath()+ "/Login");  
+        if(n == null){
+            response.sendRedirect(request.getContextPath()+ "/Login"); 
+        }
+        
+        out.println("\n<h2>Welcome, to craftsman page, " + n + "</h2>\n");
+        RequestDispatcher rd=request.getRequestDispatcher("craftsman_page.jsp"); 
+        
+        rd.include(request,response);  
+
+        
         out.close();  
     }  
 }
+//craftsman_page
