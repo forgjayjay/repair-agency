@@ -59,7 +59,10 @@ public class dbmanager {
         
             i += ps.executeUpdate();  
             status = i > 0;
-            }catch(Exception e){ logger.error("Error on insertUser"); } 
+            }catch(Exception e){ 
+                logger.error("Error on insertUser"); 
+                logger.error(e);
+            } 
         return status;  
     }
     public boolean insertManager(String name,String pass){  
@@ -100,10 +103,13 @@ public class dbmanager {
         
             i += ps.executeUpdate();  
             status = i > 0;
-            }catch(Exception e){ logger.error("Error on insertManager"); } 
+            }catch(Exception e){ 
+                logger.error("Error on insertManager"); 
+                logger.error(e);
+            }
         return status;  
     }
-    public boolean insertCraftsman(String login,String pass, String name){  
+    public boolean insertCraftsman(String login, String pass, String name){  
         logger.debug("Run insert craftsman into database method");
 
         boolean status=false; 
@@ -165,6 +171,8 @@ public class dbmanager {
 
             }catch(Exception e){ 
                 logger.error("Error on insertCraftsman");
+                logger.error(e);
+
                 status=false;
              } 
         return status;  
@@ -182,9 +190,13 @@ public class dbmanager {
             int userID = 0;
             PreparedStatement ps = con.prepareStatement(constants.FIND_USER);
             ps.setString(1,name);
-            ResultSet rs = ps.executeQuery();  
-            while(rs.next()){
-                userID=rs.getInt(1);
+            ResultSet rs = ps.executeQuery(); 
+            if(!rs.next()){
+                return false;
+            } else{
+                do{
+                    userID=rs.getInt(1);
+                } while(rs.next());
             }
             ps.close();
             logger.debug("Inserting order into database");
@@ -199,6 +211,7 @@ public class dbmanager {
             status = i > 0;
             }catch(Exception e){ 
                 logger.error("Error on insertOrder"); 
+                logger.error(e);
             } 
         return status;  
     }
@@ -246,7 +259,10 @@ public class dbmanager {
                 str += " Payment status: " + rs.getString("payment_status") + "\n\n\n";
             }
             rs.close();
-            }catch(Exception e){ logger.error("Error on insertCraftsman"); } 
+            }catch(Exception e){ 
+            logger.error("Error on showOrder");
+            logger.error(e);
+        } 
         return str;  
     }
     public String showCraftsmanOrder(String name){  
@@ -273,22 +289,28 @@ public class dbmanager {
             
             rs = ps.executeQuery(); 
             logger.debug("Displaying orders");
-            while(rs.next()){
-                str += "Order number: " + Integer.toString(rs.getInt("id")) + "\n";
-                
-                str += "User: " + Integer.toString(rs.getInt("user_id"))+"\n";
-                
-                str += " Order status: " + rs.getString("order_status")+"\n";
-                
-                
-                str += " Payment status: " + rs.getString("payment_status") + "\n\n\n";
-            }
-            rs.first();
             if(!rs.next()){
                 str = "No assigned orders are present";
+            } else {
+                do{
+                    str += "Order number: " + Integer.toString(rs.getInt("id")) + "\n";
+                    
+                    str += "User: " + Integer.toString(rs.getInt("user_id"))+"\n";
+                    
+                    str += " Order status: " + rs.getString("order_status")+"\n";
+                    
+                    
+                    str += " Payment status: " + rs.getString("payment_status") + "\n\n\n";
+                }while(rs.next());
             }
+            
+            
+            
             rs.close();
-            }catch(Exception e){ logger.error("Error on insertCraftsman"); } 
+            }catch(Exception e){
+                logger.error("Error on showCraftsmanOrder"); 
+                logger.error(e);
+            } 
         return str;  
     }
     public boolean updateOrderStatus(String order_status, int id){  
@@ -342,7 +364,10 @@ public class dbmanager {
             ResultSet rs=ps.executeQuery();  
             status=rs.next();  
                 
-        }catch(Exception e){ logger.debug("Error on validation");}  
+        }catch(Exception e){ 
+            logger.debug("Error on validation");
+            logger.error(e);
+        }  
         return status;  
     } 
 
@@ -354,7 +379,8 @@ public class dbmanager {
             prop.load(in);
             url =prop.getProperty("connection.url");
         } catch (IOException e) {
-            logger.debug("Error on acquisition of url to database");
+            logger.error("Error on acquisition of url to database");
+            logger.error(e);
         }
         return url;
     }

@@ -9,14 +9,13 @@ import com.servlet_project.dbmanager.dbmanager;
 
 public class LoginDao { 
 
+    dbmanager dbm = dbmanager.getInstance();
 
     public boolean validate(String name,String pass){  
-        dbmanager dbm = dbmanager.getInstance();
         return dbm.validate(name, pass);
     } 
 
     public String userType(String name){
-        dbmanager dbm = dbmanager.getInstance();
         return dbm.userType(name);
     }
 }  

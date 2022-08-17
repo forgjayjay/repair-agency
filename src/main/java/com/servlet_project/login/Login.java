@@ -34,14 +34,19 @@ public class Login extends HttpServlet{
     
 
 
-    String n=request.getParameter("username");  
-    String p=request.getParameter("userpass");  
+    String name=request.getParameter("username");  
+    String pass=request.getParameter("userpass");  
     LoginDao validator = new LoginDao();
-    if(validator.validate(n, p)){ 
-        String redirectStr = validator.userType(n);
+    if(validator.validate(name, pass)){ 
+        Cookie cookies[] = request.getCookies();
+        Cookie login = new Cookie("login", name);
+        response.addCookie(login);
+        for (Cookie cookie : cookies) {
+            if(cookie.getName().equals("login")) cookie = new Cookie("login", name);
+        }
+        String redirectStr = validator.userType(name);
         RequestDispatcher rd=request.getRequestDispatcher(redirectStr + "_page"); 
-        Cookie cookie = new Cookie("login", n);
-        response.addCookie(cookie);
+        
         rd.forward(request,response);  
     }  
     else{  

@@ -27,20 +27,19 @@ public class user_order_handler extends HttpServlet {
         PrintWriter out = response.getWriter();  
         UserDao userDao = new UserDao();
         Cookie cookies[] = request.getCookies();
-        String n = null;
+        String name = null;
         if(cookies!=null){
             for(Cookie cookie : cookies ){
                 if(cookie.getName().equals("login")){
-                    n=cookie.getValue();
+                    name=cookie.getValue();
                     break;
                 }
 
             }
         } else response.sendRedirect(request.getContextPath()+ "/Login");  
-        if(n == null){
+        if(name == null){
             response.sendRedirect(request.getContextPath()+ "/Login"); 
         }
-        String name = null;
         
         if(request.getParameter("neworder")!=null) {
             

@@ -10,10 +10,10 @@ public class AdminDao {
     public boolean insertManager(String name){
         return dbm.insertManager(name, "");
     }
-    public boolean insertCraftsman(String name, String login){
+    public boolean insertCraftsman(String login, String name){
         return dbm.insertCraftsman(login, "", name);
     }
-    public boolean insertCraftsman(String name, String login, String pass){
+    public boolean insertCraftsman(String login, String pass, String name){
         return dbm.insertCraftsman(login, pass, name);
     }
 }

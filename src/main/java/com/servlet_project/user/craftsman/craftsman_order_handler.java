@@ -29,27 +29,26 @@ public class craftsman_order_handler extends HttpServlet {
         PrintWriter out = response.getWriter();  
         CraftsmanDao craftsmanDao = new CraftsmanDao();
         Cookie cookies[] = request.getCookies();
-        String n = null;
+        String name = null;
         if(cookies!=null){
             for(Cookie cookie : cookies ){
                 if(cookie.getName().equals("login")){
-                    n=cookie.getValue();
+                    name=cookie.getValue();
                     break;
                 }
 
             }
         } else response.sendRedirect(request.getContextPath()+ "/Login");  
-        if(n == null){
+        if(name == null){
             response.sendRedirect(request.getContextPath()+ "/Login"); 
         }
-        String name = null;
         
-        if(request.getParameter("showorder")!= null){
+        if(request.getParameter("show")!= null){
             out.println("Your orders: \n");
             out.println(craftsmanDao.showOrders(name));
             RequestDispatcher rd = request.getRequestDispatcher("order_status_update.jsp"); 
             rd.include(request,response); 
-        } else {
+        } else if (request.getParameter("id") != null){
             String id = request.getParameter("id");
             if(request.getParameter("finished") != null){
                 craftsmanDao.updateOrder(constants.ORDER_STATUS_DONE, Integer.valueOf(id));

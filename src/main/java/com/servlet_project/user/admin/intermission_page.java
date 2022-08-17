@@ -40,20 +40,20 @@ public class intermission_page extends HttpServlet {
         if(w == null){
             response.sendRedirect(request.getContextPath()+ "/Login"); 
         }
-        String l=request.getParameter("username");
-        String n=request.getParameter("name");
-        String p=request.getParameter("userpass"); 
+        String login=request.getParameter("username");
+        String name=request.getParameter("name");
+        String pass=request.getParameter("userpass"); 
 
         if(request.getParameter("manager")==null){
             if(request.getParameter("userpass")==null){
-                if(!validator.insertCraftsman(l, n)) out.println("Sorry, something went wrong");
+                if(!validator.insertCraftsman(login, name)) out.println("Sorry, something went wrong");
             }else {
-                if(!validator.insertCraftsman(l, p, n)) out.println("Sorry, something went wrong");
+                if(!validator.insertCraftsman(login, pass, name)) out.println("Sorry, something went wrong");
             }
         }else if(request.getParameter("userpass")==null){
-            if(!validator.insertManager(n)) out.println("Sorry, something went wrong");
+            if(!validator.insertManager(login)) out.println("Sorry, something went wrong");
         }else {
-            if(!validator.insertManager(n,p)) out.println("Sorry, something went wrong");
+            if(!validator.insertManager(login, pass)) out.println("Sorry, something went wrong");
         }
         RequestDispatcher rd=request.getRequestDispatcher("admin_page");  
         rd.forward(request,response); 
