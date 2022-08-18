@@ -2,6 +2,7 @@ package com.servlet_project.user.standard_user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,26 +41,35 @@ public class user_order_handler extends HttpServlet {
         if(name == null){
             response.sendRedirect(request.getContextPath()+ "/Login"); 
         }
-        
+        RequestDispatcher rd = request.getRequestDispatcher("user_page"); 
+        rd.include(request,response);  
         if(request.getParameter("neworder")!=null) {
             
             if(userDao.insertOrder(name)) out.println("Order successfully created");
             else out.println("Sorry, something went wrong");
 
             
-        } else
-       
-        if(request.getParameter("showorder")!= null){
-            out.println("Your orders: \n");
-            out.println(userDao.showOrders(name));
-        } else
-
-        if(request.getParameter("payment")!= null){
-            out.println("Your orders: \n");
-            out.println(userDao.showUnpaidOrders(name));
         }
-        RequestDispatcher rd = request.getRequestDispatcher("user_page"); 
-        rd.include(request,response);  
+        if(request.getParameter("showorder")!= null){
+            out.println("Your orders: \n<br />");
+            out.println();
+            ArrayList<String> arrayString =  userDao.showOrders(name);
+            for (String string : arrayString) {
+                out.println(string + "<br />");
+                out.println();
+            }
+        }
+        if(request.getParameter("payment")!= null){
+            out.println("Your orders: \n<br />");
+            out.println();
+
+            ArrayList<String> arrayString =  userDao.showUnpaidOrders(name);
+            for (String string : arrayString) {
+                out.println(string + "<br />");
+                out.println();
+            }        
+        }
+        
         out.close();  
     }  
 }

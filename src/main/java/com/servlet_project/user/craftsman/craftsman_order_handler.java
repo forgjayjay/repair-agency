@@ -2,6 +2,7 @@ package com.servlet_project.user.craftsman;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,12 +43,19 @@ public class craftsman_order_handler extends HttpServlet {
         if(name == null){
             response.sendRedirect(request.getContextPath()+ "/Login"); 
         }
-        
+        RequestDispatcher reqdisp = request.getRequestDispatcher("craftsman_page"); 
+        reqdisp.include(request,response);  
         if(request.getParameter("show")!= null){
-            out.println("Your orders: \n");
-            out.println(craftsmanDao.showOrders(name));
             RequestDispatcher rd = request.getRequestDispatcher("order_status_update.jsp"); 
             rd.include(request,response); 
+            out.println("Your orders: <br />");
+            out.println();
+            ArrayList<String> arrayString = craftsmanDao.showOrders(name);
+            for (String string : arrayString) {
+                out.println(string + "<br />");
+                out.println();
+            }
+            
         } else if (request.getParameter("id") != null){
             String id = request.getParameter("id");
             if(request.getParameter("finished") != null){
@@ -58,8 +66,7 @@ public class craftsman_order_handler extends HttpServlet {
 
             }
         }
-        RequestDispatcher reqdisp = request.getRequestDispatcher("craftsman_page"); 
-        reqdisp.include(request,response);  
+        
          
         out.close();  
     }  

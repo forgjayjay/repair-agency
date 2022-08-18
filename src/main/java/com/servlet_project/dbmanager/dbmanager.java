@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Properties;
 import org.apache.log4j.Logger;
 
@@ -215,13 +216,14 @@ public class dbmanager {
             } 
         return status;  
     }
-    public String showOrder(String name, String type){  
+    public ArrayList<String> showOrder(String name, String type){  
 
         logger.debug("Run show order");
         ResultSet rs = null;
         int userID = 0;
         String str = "";
         String craftsman_unassigned = "unassinged";
+        ArrayList<String> stringArray = new ArrayList<>();
         try(
             Connection con = DriverManager.getConnection(getUrlToDB());
         ){  
@@ -231,7 +233,7 @@ public class dbmanager {
              rs = ps.executeQuery();  
             if( rs.next()){
                 userID = rs.getInt(1);
-            } else return "\n";
+            } else return new ArrayList<String>();
             ps.close();
             String statement = "";
             if(type.equals("all")){
@@ -247,29 +249,32 @@ public class dbmanager {
             rs = ps.executeQuery(); 
             logger.debug("Displaying orders");
             while(rs.next()){
-                str += "Order number: " + Integer.toString(rs.getInt("id")) + "\n";
+                str = " <br />Order number: " + Integer.toString(rs.getInt("id")) + "";
                 
-                str += "User: " + Integer.toString(rs.getInt("user_id"))+"\n";
-                if(rs.getInt("craftsman_id") == 1) str += " Craftsman: " + craftsman_unassigned+"\n";
-                else str += " Craftsman: " + Integer.toString(rs.getInt("craftsman_id"))+"\n";
+                str += " <br />User: " + Integer.toString(rs.getInt("user_id"))+"";
+                if(rs.getInt("craftsman_id") == 1) str += " \nCraftsman: " + craftsman_unassigned+"\n";
+                else str += " <br />Craftsman: " + Integer.toString(rs.getInt("craftsman_id"))+"";
                 
-                str += " Order status: " + rs.getString("order_status")+"\n";
+                str += " <br />Order status: " + rs.getString("order_status")+"";
                 
                 
-                str += " Payment status: " + rs.getString("payment_status") + "\n\n\n";
+                str += " <br />Payment status: " + rs.getString("payment_status") + "";
+                str += "<br /><br /><br />";
+                stringArray.add(str);
             }
             rs.close();
             }catch(Exception e){ 
             logger.error("Error on showOrder");
             logger.error(e);
         } 
-        return str;  
+        return stringArray;  
     }
-    public String showCraftsmanOrder(String name){  
+    public ArrayList<String> showCraftsmanOrder(String name){  
         logger.debug("Run show craftsman order");
         ResultSet rs = null;
         int userID = 0;
         String str = "";
+        ArrayList<String> arrayString = new ArrayList<>();
         try(
             Connection con = DriverManager.getConnection(getUrlToDB());
         ){  
@@ -279,7 +284,7 @@ public class dbmanager {
              rs = ps.executeQuery();  
             if( rs.next()){
                 userID = rs.getInt(1);
-            } else return "\n";
+            } else return new ArrayList<>();
             ps.close();
             
             ps = con.prepareStatement(
@@ -293,14 +298,16 @@ public class dbmanager {
                 str = "No assigned orders are present";
             } else {
                 do{
-                    str += "Order number: " + Integer.toString(rs.getInt("id")) + "\n";
+                    str = "<br />Order number: " + Integer.toString(rs.getInt("id")) + "";
                     
-                    str += "User: " + Integer.toString(rs.getInt("user_id"))+"\n";
+                    str += "<br />User: " + Integer.toString(rs.getInt("user_id"))+"";
                     
-                    str += " Order status: " + rs.getString("order_status")+"\n";
+                    str += "<br />Order status: " + rs.getString("order_status")+"";
                     
                     
-                    str += " Payment status: " + rs.getString("payment_status") + "\n\n\n";
+                    str += "<br />Payment status: " + rs.getString("payment_status") + "";
+                    str+="<br /><br /><br />";
+                    arrayString.add(str);
                 }while(rs.next());
             }
             
@@ -311,7 +318,7 @@ public class dbmanager {
                 logger.error("Error on showCraftsmanOrder"); 
                 logger.error(e);
             } 
-        return str;  
+        return arrayString;  
     }
     public boolean updateOrderStatus(String order_status, int id){  
         logger.debug("Run update order status method");
