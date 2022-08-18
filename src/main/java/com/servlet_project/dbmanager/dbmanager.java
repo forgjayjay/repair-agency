@@ -222,7 +222,7 @@ public class dbmanager {
         ResultSet rs = null;
         int userID = 0;
         String str = "";
-        String craftsman_unassigned = "unassinged";
+        //String craftsman_unassigned = "unassinged";
         ArrayList<String> stringArray = new ArrayList<>();
         try(
             Connection con = DriverManager.getConnection(getUrlToDB());
@@ -250,15 +250,12 @@ public class dbmanager {
             logger.debug("Displaying orders");
             while(rs.next()){
                 str = " <br />Order number: " + Integer.toString(rs.getInt("id")) + "";
-                
-                str += " <br />User: " + Integer.toString(rs.getInt("user_id"))+"";
-                if(rs.getInt("craftsman_id") == 1) str += " \nCraftsman: " + craftsman_unassigned+"\n";
-                else str += " <br />Craftsman: " + Integer.toString(rs.getInt("craftsman_id"))+"";
-                
+                //str += " <br />User: " + Integer.toString(rs.getInt("user_id"))+"";
+                //if(rs.getInt("craftsman_id") == 1) str += " \nCraftsman: " + craftsman_unassigned+"\n";
+                //else str += " <br />Craftsman: " + Integer.toString(rs.getInt("craftsman_id"))+"";
                 str += " <br />Order status: " + rs.getString("order_status")+"";
-                
-                
                 str += " <br />Payment status: " + rs.getString("payment_status") + "";
+                if(!(rs.getDouble("cost") < 1)) str += "<br />Cost: " + rs.getString("cost") + "";
                 str += "<br /><br /><br />";
                 stringArray.add(str);
             }
@@ -306,6 +303,7 @@ public class dbmanager {
                     
                     
                     str += "<br />Payment status: " + rs.getString("payment_status") + "";
+
                     str+="<br /><br /><br />";
                     arrayString.add(str);
                 }while(rs.next());

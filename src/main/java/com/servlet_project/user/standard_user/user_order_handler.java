@@ -59,8 +59,8 @@ public class user_order_handler extends HttpServlet {
                 out.println();
             }
         }
-        if(request.getParameter("payment")!= null){
-            out.println("Your orders: \n<br />");
+        if(request.getParameter("showorder_payment")!= null){
+            out.println("Your unpaid orders: <br />");
             out.println();
 
             ArrayList<String> arrayString =  userDao.showUnpaidOrders(name);

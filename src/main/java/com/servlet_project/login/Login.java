@@ -42,7 +42,10 @@ public class Login extends HttpServlet{
         Cookie login = new Cookie("login", name);
         response.addCookie(login);
         for (Cookie cookie : cookies) {
-            if(cookie.getName().equals("login")) cookie.setValue(name);
+            if(cookie.getName().equals("login")) {
+                cookie = new Cookie("login", "");
+                cookie.setValue(name);
+            }
         }
         String redirectStr = validator.userType(name);
         RequestDispatcher rd=request.getRequestDispatcher(redirectStr + "_page"); 

@@ -21,8 +21,8 @@ public class constants {
 	public static final String INSERT_USER = "insert into users values (0, ? , ?, 'user')";
 	public static final String INSERT_MNGR = "insert into users values (0, ? , ?, 'manager')";
 	public static final String INSERT_CRFTSMN = "insert into users values (0, ? , ?, 'craftsman')";
-	public static final String INSERT_INTO_CRFTSMN = "insert into craftsmen values (?, ?)";
-	public static final String INSERT_NEW_ORDER = "insert into orders values (0, ?, 1, ?, ?)";
+	public static final String INSERT_INTO_CRFTSMN = "insert into craftsmen values (?, ?, 0)";
+	public static final String INSERT_NEW_ORDER = "insert into orders values (0, ?, 1, ?, ?, 0)";
 	
 	public static final String SHOW_ALL_ORDERS = "select * from orders where user_id = ?";
 	public static final String SHOW_ORDER = "select * from orders where id = ?";

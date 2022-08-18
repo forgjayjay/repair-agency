@@ -27,7 +27,8 @@ public class Logout extends HttpServlet{
     }
     response.setContentType("text/html");  
     PrintWriter out = response.getWriter();  
-    
+    Cookie cookie = new Cookie("login", "");
+    response.addCookie(cookie);
     if(login){
         
         out.println("Successfully logged out.");
@@ -56,6 +57,8 @@ public class Logout extends HttpServlet{
             cookie.setMaxAge(0);
         }
     }
+    Cookie cookie = new Cookie("login", "");
+    response.addCookie(cookie);
 
     out.println("Successfully logged out.");
     RequestDispatcher rd=request.getRequestDispatcher("Login"); 

@@ -16,6 +16,7 @@ create table users(
 create table craftsmen(
 	id int,
     name varchar(20),
+	rating double,
 	foreign key(id) references users(id) on delete cascade
 );
 
@@ -25,6 +26,7 @@ create table orders(
     craftsman_id int,
     order_status varchar(30),
     payment_status varchar(30),
+    cost double,
     primary key(id),
     foreign key(user_id) references users(id) on delete cascade,
     foreign key(craftsman_id) references craftsmen(id) on delete cascade
