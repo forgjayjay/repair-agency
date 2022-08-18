@@ -33,7 +33,7 @@ create table orders(
 );
 
 insert into users values(0,'admin','admin','admin');
-insert into craftsmen values (1,'admin');
+insert into craftsmen values (1,'admin', 0);
 select * from users;
 select * from craftsmen;
 select * from orders;
