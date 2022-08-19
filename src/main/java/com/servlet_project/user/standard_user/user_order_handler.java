@@ -33,7 +33,6 @@ public class user_order_handler extends HttpServlet {
             for(Cookie cookie : cookies ){
                 if(cookie.getName().equals("login")){
                     name=cookie.getValue();
-                    break;
                 }
 
             }
@@ -42,7 +41,7 @@ public class user_order_handler extends HttpServlet {
             response.sendRedirect(request.getContextPath()+ "/Login"); 
         }
         RequestDispatcher rd = request.getRequestDispatcher("user_page"); 
-        rd.include(request,response);  
+        
         if(request.getParameter("neworder")!=null) {
             
             if(userDao.insertOrder(name)) out.println("Order successfully created");
@@ -69,7 +68,7 @@ public class user_order_handler extends HttpServlet {
                 out.println();
             }        
         }
-        
+        rd.include(request,response); 
         out.close();  
     }  
 }

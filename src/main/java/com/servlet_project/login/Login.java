@@ -19,8 +19,9 @@ public class Login extends HttpServlet{
   
     response.setContentType("text/html");  
     PrintWriter out = response.getWriter();  
-    
+    Cookie cookie = new Cookie("login", "");
     RequestDispatcher rd=request.getRequestDispatcher("login_page.jsp");  
+    response.addCookie(cookie);
     rd.include(request,response);  
           
     out.close();  
@@ -35,22 +36,23 @@ public class Login extends HttpServlet{
 
 
     String name=request.getParameter("username");  
-    String pass=request.getParameter("userpass");  
+    String pass=request.getParameter("userpass"); 
+    Cookie cookies[] = request.getCookies();
+        
+    for (Cookie cookie : cookies) {
+        if(cookie.getName().equals("login")) {
+            cookie = new Cookie("login", name);
+            cookie.setValue(name);
+        }
+    } 
     LoginDao validator = new LoginDao();
     if(validator.validate(name, pass)){ 
-        Cookie cookies[] = request.getCookies();
-        Cookie login = new Cookie("login", name);
-        response.addCookie(login);
-        for (Cookie cookie : cookies) {
-            if(cookie.getName().equals("login")) {
-                cookie = new Cookie("login", "");
-                cookie.setValue(name);
-            }
-        }
-        String redirectStr = validator.userType(name);
-        RequestDispatcher rd=request.getRequestDispatcher(redirectStr + "_page"); 
         
-        rd.forward(request,response);  
+        String redirectStr = validator.userType(name);
+        Cookie loginCookie = new Cookie("login", name);
+        response.addCookie(loginCookie);
+        response.sendRedirect(request.getContextPath() +"/"+ redirectStr+ "_page");
+          
     }  
     else{  
         out.print("Sorry username or password error");  

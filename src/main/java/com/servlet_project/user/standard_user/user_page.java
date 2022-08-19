@@ -11,12 +11,17 @@ public class user_page extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
         throws ServletException, IOException {
-        response.setContentType("text/html");  
-        PrintWriter out = response.getWriter();  
-              
-        out.print("Please, login first");  
-        RequestDispatcher rd=request.getRequestDispatcher("login_page.jsp");  
-        rd.include(request,response);    
+            response.setContentType("text/html");  
+            PrintWriter out = response.getWriter();  
+            
+            Cookie cookies[] = request.getCookies();
+            if(cookies!=null){
+                for(Cookie cookie : cookies ){
+                    if(cookie.getName().equals("login")) {
+                        doPost(request, response);
+                    }
+                }
+            } else response.sendRedirect(request.getContextPath()+ "/Login");
               
         out.close();      
     }
@@ -31,9 +36,7 @@ public class user_page extends HttpServlet {
             for(Cookie cookie : cookies ){
                 if(cookie.getName().equals("login")){
                     n=cookie.getValue();
-                    break;
                 }
-
             }
         } else response.sendRedirect(request.getContextPath()+ "/Login");  
         if(n == null){

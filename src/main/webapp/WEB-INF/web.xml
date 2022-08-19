@@ -69,7 +69,7 @@
 
   <servlet>
     <servlet-name>manager_page</servlet-name>
-    <servlet-class>com.servlet_project.user.manager.manager-page</servlet-class>
+    <servlet-class>com.servlet_project.user.manager.manager_page</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>manager_page</servlet-name>
