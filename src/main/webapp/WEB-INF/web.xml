@@ -3,7 +3,8 @@
     xmlns="http://java.sun.com/xml/ns/javaee"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
     id="WebApp_ID" version="3.0">
- <display-name>repair agency web application</display-name>
+
+  <display-name>repair agency web application</display-name>
   <servlet>
     <servlet-name>Login</servlet-name>
     <servlet-class>com.servlet_project.login.Login</servlet-class>
@@ -83,6 +84,7 @@
     <servlet-name>craftsman_page</servlet-name>
     <url-pattern>/craftsman_page</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>craftsman_order_handler</servlet-name>
     <servlet-class>com.servlet_project.user.craftsman.craftsman_order_handler</servlet-class>
@@ -90,6 +92,15 @@
   <servlet-mapping>
     <servlet-name>craftsman_order_handler</servlet-name>
     <url-pattern>/craftsman_order_handler</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>manager_order_handler</servlet-name>
+    <servlet-class>com.servlet_project.user.manager.manager_order_handler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>manager_order_handler</servlet-name>
+    <url-pattern>/manager_order_handler</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -117,12 +128,13 @@
       <url-pattern>/admin_page/form</url-pattern>   
   </servlet-mapping> -->
   <context-param>
-        <param-name>log4j-config-location</param-name>
-        <param-value>WEB-INF/log4j.properties</param-value>
-    </context-param>
-    <listener>
-      <listener-class>com.servlet_project.logger_innit.ContextListener</listener-class>
-    </listener>
+      <param-name>log4j-config-location</param-name>
+      <param-value>WEB-INF/log4j.properties</param-value>
+  </context-param>
+  <listener>
+    <listener-class>com.servlet_project.logger_innit.ContextListener</listener-class>
+  </listener>
+  
   <welcome-file-list>
     <welcome-file>Login</welcome-file>
   </welcome-file-list>

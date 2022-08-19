@@ -2,11 +2,13 @@ package com.servlet_project.user.manager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
-public class manager_page extends HttpServlet {
+
+public class manager_order_handler extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
         throws ServletException, IOException {
@@ -16,7 +18,7 @@ public class manager_page extends HttpServlet {
         out.print("Please, login first");  
         RequestDispatcher rd=request.getRequestDispatcher("login_page.jsp");  
         rd.include(request,response);    
-        
+              
         out.close();      
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response)  
@@ -24,27 +26,51 @@ public class manager_page extends HttpServlet {
 
         response.setContentType("text/html");  
         PrintWriter out = response.getWriter();  
+        ManagerDao managerDao = new ManagerDao();
         Cookie cookies[] = request.getCookies();
-        String n = null;
+        String name = null;
         if(cookies!=null){
             for(Cookie cookie : cookies ){
                 if(cookie.getName().equals("login")){
-                    n=cookie.getValue();
+                    name=cookie.getValue();
                     break;
                 }
 
             }
         } else response.sendRedirect(request.getContextPath()+ "/Login");  
-        if(n == null){
+        if(name == null){
             response.sendRedirect(request.getContextPath()+ "/Login"); 
         }
-        
-        out.println("\n<h2>Welcome, to manager page, " + n + "</h2><br /><br />");
-        RequestDispatcher rd=request.getRequestDispatcher("manager_page.jsp"); 
-        
+        RequestDispatcher rd = request.getRequestDispatcher("user_page"); 
         rd.include(request,response);  
+        if(request.getParameter("neworder")!=null) {
+            
+            if(managerDao.insertOrder(name)) out.println("Order successfully created");
+            else out.println("Sorry, something went wrong");
 
+            
+        }
+        if(request.getParameter("showorder")!= null){
+            out.println("Your orders: \n<br />");
+            out.println();
+            ArrayList<String> arrayString =  managerDao.showOrders(name);
+            for (String string : arrayString) {
+                out.println(string + "<br />");
+                out.println();
+            }
+        }
+        if(request.getParameter("showorder_payment")!= null){
+            out.println("Your unpaid orders: <br />");
+            out.println();
+
+            ArrayList<String> arrayString =  managerDao.showUnpaidOrders(name);
+            for (String string : arrayString) {
+                out.println(string + "<br />");
+                out.println();
+            }        
+        }
         
         out.close();  
     }  
 }
+
