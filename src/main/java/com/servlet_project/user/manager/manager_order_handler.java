@@ -42,6 +42,7 @@ public class manager_order_handler extends HttpServlet {
             response.sendRedirect(request.getContextPath()+ "/Login"); 
         }
         RequestDispatcher rd = request.getRequestDispatcher("user_page"); 
+        rd.forward(request, response);
         if(request.getParameter("neworder")!=null) {
             
             if(managerDao.insertOrder(name)) out.println("Order successfully created");
@@ -68,7 +69,6 @@ public class manager_order_handler extends HttpServlet {
                 out.println();
             }        
         }
-        rd.include(request,response);  
 
         out.close();  
     }  

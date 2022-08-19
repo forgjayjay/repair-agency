@@ -23,7 +23,7 @@ public class user_page extends HttpServlet {
                 }
             } else response.sendRedirect(request.getContextPath()+ "/Login");
               
-        out.close();      
+        out.close(); 
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response)  
         throws ServletException, IOException {  

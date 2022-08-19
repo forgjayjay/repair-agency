@@ -19,13 +19,12 @@ public class craftsman_order_handler extends HttpServlet {
               
         out.print("Please, login first");  
         RequestDispatcher rd=request.getRequestDispatcher("login_page.jsp");  
-        rd.include(request,response);    
+        rd.forward(request,response);    
               
         out.close();      
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response)  
         throws ServletException, IOException {  
-        RequestDispatcher rd = request.getRequestDispatcher("order_status_update.jsp");
         response.setContentType("text/html");  
         PrintWriter out = response.getWriter();  
         CraftsmanDao craftsmanDao = new CraftsmanDao();
@@ -44,8 +43,10 @@ public class craftsman_order_handler extends HttpServlet {
             response.sendRedirect(request.getContextPath()+ "/Login"); 
         }
         RequestDispatcher reqdisp = request.getRequestDispatcher("craftsman_page"); 
+        reqdisp.forward(request, response);
         if(request.getParameter("show")!= null){
-            rd = request.getRequestDispatcher("order_status_update.jsp"); 
+            
+
             out.println("Your orders: <br />");
             out.println();
             ArrayList<String> arrayString = craftsmanDao.showOrders(name);
@@ -53,7 +54,6 @@ public class craftsman_order_handler extends HttpServlet {
                 out.println(string + "<br />");
                 out.println();
             }
-            rd.include(request,response); 
 
         } else if (request.getParameter("id") != null){
             String id = request.getParameter("id");
@@ -65,8 +65,6 @@ public class craftsman_order_handler extends HttpServlet {
 
             }
         }
-        
-        reqdisp.include(request,response);  
         out.close();  
     }  
 }

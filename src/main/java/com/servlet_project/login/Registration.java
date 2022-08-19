@@ -36,7 +36,7 @@ public class Registration extends HttpServlet{
     if(validator.insert(n, p)){  
         out.print("Account successfully created, you will be redirected to login page soon");  
         RequestDispatcher rd=request.getRequestDispatcher("login_page.jsp");  
-        rd.forward(request,response);  
+        rd.include(request, response); 
         
         //response.sendRedirect(request.getContextPath() + "/Login");
     }  
