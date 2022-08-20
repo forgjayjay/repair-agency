@@ -24,6 +24,7 @@ public class constants {
 	public static final String INSERT_INTO_CRFTSMN = "insert into craftsmen values (?, ?, 0)";
 	public static final String INSERT_NEW_ORDER = "insert into orders values (0, ?, 1, ?, ?, 0)";
 	
+	public static final String SHOW_MANAGER_ORDERS = "select * from orders order by id ? limit 100";
 	public static final String SHOW_ALL_ORDERS = "select * from orders where user_id = ?";
 	public static final String SHOW_ORDER = "select * from orders where id = ?";
 

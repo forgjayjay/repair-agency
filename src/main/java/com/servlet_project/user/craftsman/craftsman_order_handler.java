@@ -42,8 +42,12 @@ public class craftsman_order_handler extends HttpServlet {
         if(name == null){
             response.sendRedirect(request.getContextPath()+ "/Login"); 
         }
-        RequestDispatcher reqdisp = request.getRequestDispatcher("craftsman_page"); 
-        reqdisp.forward(request, response);
+        out.println("\n<h2>Welcome, to craftsman page, " + name + "</h2>\n");
+
+        RequestDispatcher rd = request.getRequestDispatcher("order_status_update.jsp"); 
+        rd.include(request, response);
+        rd=request.getRequestDispatcher("craftsman_page.jsp"); 
+        rd.include(request,response); 
         if(request.getParameter("show")!= null){
             
 

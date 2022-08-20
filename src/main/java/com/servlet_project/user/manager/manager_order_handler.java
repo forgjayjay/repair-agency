@@ -41,33 +41,18 @@ public class manager_order_handler extends HttpServlet {
         if(name == null){
             response.sendRedirect(request.getContextPath()+ "/Login"); 
         }
-        RequestDispatcher rd = request.getRequestDispatcher("user_page"); 
-        rd.forward(request, response);
-        if(request.getParameter("neworder")!=null) {
-            
-            if(managerDao.insertOrder(name)) out.println("Order successfully created");
-            else out.println("Sorry, something went wrong");
+        RequestDispatcher rd=request.getRequestDispatcher("manager_page.jsp"); 
+        
+        rd.include(request,response);  
 
+        if(request.getParameter("showorder")!=null) {
             
-        }
-        if(request.getParameter("showorder")!= null){
-            out.println("Your orders: \n<br />");
-            out.println();
-            ArrayList<String> arrayString =  managerDao.showOrders(name);
+            out.println("All available orders:<br />");
+            ArrayList<String> arrayString = managerDao.showAllOrdersAsc();
             for (String string : arrayString) {
                 out.println(string + "<br />");
                 out.println();
             }
-        }
-        if(request.getParameter("showorder_payment")!= null){
-            out.println("Your unpaid orders: <br />");
-            out.println();
-
-            ArrayList<String> arrayString =  managerDao.showUnpaidOrders(name);
-            for (String string : arrayString) {
-                out.println(string + "<br />");
-                out.println();
-            }        
         }
 
         out.close();  

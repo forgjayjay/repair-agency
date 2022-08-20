@@ -40,8 +40,10 @@ public class user_order_handler extends HttpServlet {
         if(name == null){
             response.sendRedirect(request.getContextPath()+ "/Login"); 
         }
-        RequestDispatcher rd = request.getRequestDispatcher("user_page"); 
-        rd.forward(request, response);
+        RequestDispatcher rd=request.getRequestDispatcher("user_page.jsp"); 
+        
+        rd.include(request,response);  
+
         if(request.getParameter("neworder")!=null) {
             
             if(userDao.insertOrder(name)) out.println("Order successfully created");
@@ -68,7 +70,9 @@ public class user_order_handler extends HttpServlet {
                 out.println();
             }        
         }
-        
+        if(request.getParameter("review") != null){
+            out.println("Leave a review : <br />");
+        }
         out.close();  
     }  
 }

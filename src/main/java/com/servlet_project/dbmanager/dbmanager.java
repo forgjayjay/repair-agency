@@ -266,6 +266,44 @@ public class dbmanager {
         } 
         return stringArray;  
     }
+    public ArrayList<String> showManagerOrders(String type){  
+
+        logger.debug("Run show manager orders");
+        ResultSet rs = null;
+        String str = "";
+        String craftsman_unassigned = "unassinged";
+        ArrayList<String> stringArray = new ArrayList<>();
+        try(
+            Connection con = DriverManager.getConnection(getUrlToDB());
+        ){  
+            logger.debug("Looking for orders");
+            PreparedStatement ps = con.prepareStatement(
+                constants.SHOW_MANAGER_ORDERS
+            );  
+            if(type.equals("ASC")){
+                ps.setString(1, "ASC");
+            }else ps.setString(1, "DESC");
+            
+            rs = ps.executeQuery(); 
+            logger.debug("Displaying orders");
+            while(rs.next()){
+                str = " <br />Order number: " + Integer.toString(rs.getInt("id")) + "";
+                str += " <br />User: " + Integer.toString(rs.getInt("user_id"))+"";
+                if(rs.getInt("craftsman_id") == 1) str += " \nCraftsman: " + craftsman_unassigned+"\n";
+                else str += " <br />Craftsman: " + Integer.toString(rs.getInt("craftsman_id"))+"";
+                str += " <br />Order status: " + rs.getString("order_status")+"";
+                str += " <br />Payment status: " + rs.getString("payment_status") + "";
+                if(!(rs.getDouble("cost") < 1)) str += "<br />Cost: " + rs.getString("cost") + "";
+                str += "<br /><br /><br />";
+                stringArray.add(str);
+            }
+            rs.close();
+            }catch(Exception e){ 
+            logger.error("Error on showManagerOrder");
+            logger.error(e);
+        } 
+        return stringArray;  
+    }
     public ArrayList<String> showCraftsmanOrder(String name){  
         logger.debug("Run show craftsman order");
         ResultSet rs = null;
@@ -293,6 +331,7 @@ public class dbmanager {
             logger.debug("Displaying orders");
             if(!rs.next()){
                 str = "No assigned orders are present";
+                arrayString.add(str);
             } else {
                 do{
                     str = "<br />Order number: " + Integer.toString(rs.getInt("id")) + "";

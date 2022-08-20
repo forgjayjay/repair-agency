@@ -15,8 +15,13 @@ public class ManagerDao {
 
         return arrayString;
     }
-    public ArrayList<String> showUnpaidOrders(String name){
-        arrayString = dbm.showOrder(name, "unpaid");
+    public ArrayList<String> showAllOrdersAsc(){
+        arrayString = dbm.showManagerOrders("ASC");
+
+        return arrayString;
+    }
+    public ArrayList<String> showAllOrdersDesc(){
+        arrayString = dbm.showManagerOrders("DESC");
 
         return arrayString;
     }

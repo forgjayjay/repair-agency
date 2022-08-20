@@ -10,6 +10,6 @@
             <input type="submit" name="showorder" value="show my orders" /><br/><br/>
             <input type="submit" name="showorder_payment" value="show not paid orders" /><br/><br/>
         </form>
-        <a href = "Logout">Logout</a>
+        <h2><a href = "Logout">Logout</a></h2><br />
     </body>
 </html>
