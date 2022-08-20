@@ -40,6 +40,8 @@ public class user_order_handler extends HttpServlet {
         if(name == null){
             response.sendRedirect(request.getContextPath()+ "/Login"); 
         }
+        out.println("\n<h2>Welcome, to user page, " + name + "</h2>\n");
+
         RequestDispatcher rd=request.getRequestDispatcher("user_page.jsp"); 
         
         rd.include(request,response);  

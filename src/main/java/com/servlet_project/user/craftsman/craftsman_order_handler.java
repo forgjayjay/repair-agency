@@ -51,7 +51,7 @@ public class craftsman_order_handler extends HttpServlet {
         if(request.getParameter("show")!= null){
             
 
-            out.println("Your orders: <br />");
+            out.println("Your assigned orders: <br />");
             out.println();
             ArrayList<String> arrayString = craftsmanDao.showOrders(name);
             for (String string : arrayString) {
@@ -62,11 +62,17 @@ public class craftsman_order_handler extends HttpServlet {
         } else if (request.getParameter("id") != null){
             String id = request.getParameter("id");
             if(request.getParameter("finished") != null){
-                craftsmanDao.updateOrder(constants.ORDER_STATUS_DONE, Integer.valueOf(id));
-
+                try {
+                    craftsmanDao.updateOrder(constants.ORDER_STATUS_DONE, Integer.valueOf(id));
+                } catch (Exception e) {
+                    out.println("<br/ ><h2>Something went wrong! Maybe try entering correct order id!</h2><br/ >");
+                }
             } else{
-                craftsmanDao.updateOrder(constants.ORDER_STATUS_WORKING, Integer.valueOf(id));
-
+                try {
+                    craftsmanDao.updateOrder(constants.ORDER_STATUS_WORKING, Integer.valueOf(id));
+                } catch (Exception e) {
+                    out.println("<br/ ><h2>Something went wrong! Maybe try entering correct order id!</h2><br/ >");
+                }
             }
         }
         out.close();  

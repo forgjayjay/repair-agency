@@ -41,6 +41,8 @@ public class manager_order_handler extends HttpServlet {
         if(name == null){
             response.sendRedirect(request.getContextPath()+ "/Login"); 
         }
+        out.println("\n<h2>Welcome, to manager page, " + name + "</h2><br /><br />");
+
         RequestDispatcher rd=request.getRequestDispatcher("manager_page.jsp"); 
         
         rd.include(request,response);  
