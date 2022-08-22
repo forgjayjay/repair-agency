@@ -14,7 +14,7 @@ public class CraftsmanDao {
 
         return arrayString;
     }
-    public boolean updateOrder(String status, int id){
-        return dbm.updateOrderStatus(status, id);
+    public boolean updateOrder(String status, int id, String name){
+        return dbm.updateOrderStatus(status, id, name);
     }
 }

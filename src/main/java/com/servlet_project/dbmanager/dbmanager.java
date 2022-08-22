@@ -178,6 +178,54 @@ public class dbmanager {
              } 
         return status;  
     }
+    public boolean appointCraftsman(int craftsmanID, int orderID){  
+        logger.debug("Run appointCraftsman method");
+
+        boolean status=false; 
+        int i = 0;
+        try(
+            Connection con = DriverManager.getConnection(getUrlToDB());
+        ){  
+            logger.debug("Updating order");
+            PreparedStatement ps = con.prepareStatement(constants.UPDATE_ORDER_CRFTSMN);
+            ps.setInt(1,craftsmanID);
+            ps.setInt(2,orderID);
+
+            i += ps.executeUpdate(); 
+            status = i > 0;
+
+            }catch(Exception e){ 
+                logger.error("Error on appointCraftsman");
+                logger.error(e);
+
+                status=false;
+             } 
+        return status;  
+    }
+    public boolean priceOrder(Double cost, int orderID){  
+        logger.debug("Run priceOrder method");
+
+        boolean status=false; 
+        int i = 0;
+        try(
+            Connection con = DriverManager.getConnection(getUrlToDB());
+        ){  
+            logger.debug("Updating order");
+            PreparedStatement ps = con.prepareStatement(constants.UPDATE_ORDER_PRICE);
+            ps.setDouble(1,cost);
+            ps.setInt(2,orderID);
+
+            i += ps.executeUpdate(); 
+            status = i > 0;
+
+            }catch(Exception e){ 
+                logger.error("Error on priceOrder");
+                logger.error(e);
+
+                status=false;
+             } 
+        return status;  
+    }
     public boolean insertOrder(String name){  
         logger.debug("Run insert order into database method");
 
@@ -357,23 +405,42 @@ public class dbmanager {
             } 
         return arrayString;  
     }
-    public boolean updateOrderStatus(String order_status, int id){  
+    public boolean updateOrderStatus(String order_status, int id, String name){  
         logger.debug("Run update order status method");
 
         boolean status=false; 
         int i = 0;
-        
+        int craftsmanID = 0;
+        int currentID = 0;
         try(
             Connection con = DriverManager.getConnection(getUrlToDB());
         ){  
-            logger.debug("Looking order");
-            PreparedStatement ps = con.prepareStatement(constants.UPDATE_ORDER_STATUS);
+            PreparedStatement ps = con.prepareStatement(
+                constants.SHOW_ORDER
+            );
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();  
+            if( rs.next()){
+                craftsmanID = rs.getInt(3);
+            } else return false;
+            ps.close();
+            ps = con.prepareStatement(
+                constants.FIND_USER
+            );
+            ps.setString(1, name);
+            rs = ps.executeQuery();
+            if( rs.next()){
+                currentID = rs.getInt(1);
+            } else return false;
+            if(currentID == craftsmanID) return false;
+            logger.debug("Looking up order");
+            ps = con.prepareStatement(constants.UPDATE_ORDER_STATUS);
             ps.setString(1, order_status);
             ps.setInt(2, id);
             i += ps.executeUpdate();  
             status = i > 0;
             }catch(Exception e){ 
-                logger.error("Error on insertOrder"); 
+                logger.error("Error on updateOrderStatus"); 
             } 
         return status;  
     }

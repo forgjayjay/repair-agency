@@ -63,13 +63,17 @@ public class craftsman_order_handler extends HttpServlet {
             String id = request.getParameter("id");
             if(request.getParameter("finished") != null){
                 try {
-                    craftsmanDao.updateOrder(constants.ORDER_STATUS_DONE, Integer.valueOf(id));
+                    if(craftsmanDao.updateOrder(constants.ORDER_STATUS_DONE, Integer.valueOf(id), name)){
+                        out.println("Successfully updated!");
+                    }else out.println("Something went wrong!");
                 } catch (Exception e) {
                     out.println("<br/ ><h2>Something went wrong! Maybe try entering correct order id!</h2><br/ >");
                 }
             } else{
                 try {
-                    craftsmanDao.updateOrder(constants.ORDER_STATUS_WORKING, Integer.valueOf(id));
+                    if(craftsmanDao.updateOrder(constants.ORDER_STATUS_WORKING, Integer.valueOf(id), name)){
+                        out.println("Successfully updated!");
+                    }else out.println("Something went wrong!");
                 } catch (Exception e) {
                     out.println("<br/ ><h2>Something went wrong! Maybe try entering correct order id!</h2><br/ >");
                 }

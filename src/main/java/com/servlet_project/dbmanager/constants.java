@@ -16,6 +16,8 @@ public class constants {
 	public static final String FIND_USER = "select * from users where login = ?";
 	public static final String UPDATE_USER = "update users set acc_type = ? where login = ?";
 	public static final String UPDATE_ORDER_STATUS = "update orders set order_status = ? where id = ?";
+	public static final String UPDATE_ORDER_CRFTSMN = "update orders set craftsman_id = ? where id = ?";
+	public static final String UPDATE_ORDER_PRICE = "update orders set cost = ? where id = ?";
 
 
 	public static final String INSERT_USER = "insert into users values (0, ? , ?, 'user')";
@@ -27,7 +29,6 @@ public class constants {
 	public static final String SHOW_MANAGER_ORDERS = "select * from orders order by id ? limit 100";
 	public static final String SHOW_ALL_ORDERS = "select * from orders where user_id = ?";
 	public static final String SHOW_ORDER = "select * from orders where id = ?";
-
 	public static final String SHOW_ORDER_CRFTSMN = "select * from orders where craftsman_id = ?";
 	public static final String SHOW_NOT_PAID_ORDER = "select * from orders where user_id = "
 	+"? and payment_status = '"	+ constants.UNPAID_STATUS+"'";

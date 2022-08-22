@@ -46,17 +46,62 @@ public class manager_order_handler extends HttpServlet {
         RequestDispatcher rd=request.getRequestDispatcher("manager_page.jsp"); 
         
         rd.include(request,response);  
-
+        String login=request.getParameter("username");
+        String realname=request.getParameter("name");
         if(request.getParameter("showorder")!=null) {
-            
+            ArrayList<String> arrayString;
+            if(request.getParameter("desc") == null) {
+                arrayString = managerDao.showAllOrdersAsc();
+            }
+            else{ 
+                arrayString = managerDao.showAllOrdersDesc();
+            }
             out.println("All available orders:<br />");
-            ArrayList<String> arrayString = managerDao.showAllOrdersAsc();
             for (String string : arrayString) {
                 out.println(string + "<br />");
                 out.println();
             }
         }
-
+        if(request.getParameter("appoint")!=null) {
+            RequestDispatcher reqdisp = request.getRequestDispatcher("appoint_craftsman.jsp");
+            reqdisp.include(request, response);
+            if(request.getParameter("craftsmanID")!=null){
+                try {
+                    int craftsmanID = Integer.valueOf(request.getParameter("craftsmanID"));
+                    int orderID = Integer.valueOf(request.getParameter("orderID"));
+                    if(managerDao.appointCraftsman(craftsmanID, orderID)){
+                        out.println("Craftsman successfully updated");
+                    }else out.println("Something went wrong!");
+                } catch (Exception e) {
+                    out.println("Something went wrong!");
+                }
+            }
+                
+        }
+        if(request.getParameter("price")!=null) {
+            RequestDispatcher reqdisp = request.getRequestDispatcher("order_price.jsp");
+            reqdisp.include(request, response);
+            if(request.getParameter("price")!=null){
+                try {
+                    int craftsmanID = Integer.valueOf(request.getParameter("craftsmanID"));
+                    double price = Double.valueOf(request.getParameter("price"));
+                    if(managerDao.priceOrder(price, craftsmanID)){
+                        out.println("Price successfully updated");
+                    }else out.println("Something went wrong!");
+                } catch (Exception e) {
+                    out.println("Something went wrong!");
+                }
+            }
+        }
+        if(request.getParameter("craftsman")!=null) {
+            RequestDispatcher reqdisp = request.getRequestDispatcher("craftsman_update_manager.jsp");
+            reqdisp.include(request, response);
+            if(login!=null && realname!=null){
+                if(managerDao.updateCraftsman(login, realname)){
+                    out.println("Craftsman successfully updated");
+                }else out.println("Something went wrong!");
+            }
+        }
         out.close();  
     }  
 }
