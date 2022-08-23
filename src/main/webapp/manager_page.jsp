@@ -4,7 +4,7 @@
     </head>
     <body>
         <h2></h2>
-        <form action="placeholder" method="post"> 
+        <form action="manager_order_handler" method="post"> 
             <input type="submit" name="showorder" value="show all orders"><input type="checkbox" name="desc" value="desc"/>Descending?<br/><br/>
             <input type="submit" name="appoint" value="appoint a craftsman to an order" /><br/><br/>
             <input type="submit" name="price" value="assign price to an order" /><br/><br/>

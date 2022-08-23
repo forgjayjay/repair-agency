@@ -1,0 +1,46 @@
+DEBUG   2022-08-23 09:25:58,384 [http-bio-9090-exec-4] com.servlet_project.dbmanager.dbmanager  - Run validate method
+DEBUG   2022-08-23 09:25:58,388 [http-bio-9090-exec-4] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-23 09:26:01,631 [http-bio-9090-exec-4] com.servlet_project.dbmanager.dbmanager  - Checking for user in database
+DEBUG   2022-08-23 09:26:01,851 [http-bio-9090-exec-4] com.servlet_project.dbmanager.dbmanager  - Run userType method
+DEBUG   2022-08-23 09:26:01,852 [http-bio-9090-exec-4] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-23 09:26:02,134 [http-bio-9090-exec-4] com.servlet_project.dbmanager.dbmanager  - Checking account type
+DEBUG   2022-08-23 09:26:18,414 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Run validate method
+DEBUG   2022-08-23 09:26:18,420 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-23 09:26:18,517 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Checking for user in database
+DEBUG   2022-08-23 09:26:18,533 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Run userType method
+DEBUG   2022-08-23 09:26:18,533 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-23 09:26:18,585 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Checking account type
+DEBUG   2022-08-23 09:26:23,866 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run show craftsman order
+DEBUG   2022-08-23 09:26:23,867 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-23 09:26:23,913 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-23 09:26:24,031 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Displaying orders
+DEBUG   2022-08-23 09:26:32,884 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run validate method
+DEBUG   2022-08-23 09:26:32,885 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-23 09:26:32,942 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Checking for user in database
+DEBUG   2022-08-23 09:26:32,953 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run userType method
+DEBUG   2022-08-23 09:26:32,954 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-23 09:26:33,009 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Checking account type
+DEBUG   2022-08-23 09:26:35,182 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run show order
+DEBUG   2022-08-23 09:26:35,186 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-23 09:26:35,245 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-23 09:26:35,319 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Displaying orders
+DEBUG   2022-08-23 09:26:37,680 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run show order
+DEBUG   2022-08-23 09:26:37,681 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-23 09:26:37,738 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-23 09:26:37,744 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Displaying orders
+DEBUG   2022-08-23 09:26:46,910 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run validate method
+DEBUG   2022-08-23 09:26:46,912 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-23 09:26:46,972 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Checking for user in database
+DEBUG   2022-08-23 09:26:46,980 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run userType method
+DEBUG   2022-08-23 09:26:46,982 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-23 09:26:47,036 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Checking account type
+DEBUG   2022-08-23 09:26:54,852 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run insert manager into database method
+DEBUG   2022-08-23 09:26:54,853 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-23 09:26:54,909 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Looking if manager already exists
+DEBUG   2022-08-23 09:26:54,914 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Inserting manager into database
+DEBUG   2022-08-23 09:27:01,707 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run validate method
+DEBUG   2022-08-23 09:27:01,708 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-23 09:27:01,749 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Checking for user in database
+DEBUG   2022-08-23 09:27:01,757 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run userType method
+DEBUG   2022-08-23 09:27:01,758 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-23 09:27:01,800 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Checking account type
