@@ -81,11 +81,11 @@ public class manager_order_handler extends HttpServlet {
         if(request.getParameter("price")!=null) {
             RequestDispatcher reqdisp = request.getRequestDispatcher("order_price.jsp");
             reqdisp.include(request, response);
-            if(request.getParameter("price")!=null){
+            if(request.getParameter("cost")!=null){
                 try {
-                    int craftsmanID = Integer.valueOf(request.getParameter("craftsmanID"));
-                    double price = Double.valueOf(request.getParameter("price"));
-                    if(managerDao.priceOrder(price, craftsmanID)){
+                    int orderID = Integer.valueOf(request.getParameter("orderID"));
+                    double price = Double.valueOf(request.getParameter("cost"));
+                    if(managerDao.priceOrder(price, orderID)){
                         out.println("Price successfully updated");
                     }else out.println("Something went wrong!");
                 } catch (Exception e) {

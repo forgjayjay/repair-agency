@@ -325,12 +325,14 @@ public class dbmanager {
             Connection con = DriverManager.getConnection(getUrlToDB());
         ){  
             logger.debug("Looking for orders");
-            PreparedStatement ps = con.prepareStatement(
-                constants.SHOW_MANAGER_ORDERS
-            );  
+            String statement = "";
             if(type.equals("ASC")){
-                ps.setString(1, "ASC");
-            }else ps.setString(1, "DESC");
+                statement = constants.SHOW_MANAGER_ORDERS_ASC;
+            }else statement = constants.SHOW_MANAGER_ORDERS_DESC;
+            PreparedStatement ps = con.prepareStatement(
+                statement
+            );  
+            
             
             rs = ps.executeQuery(); 
             logger.debug("Displaying orders");
