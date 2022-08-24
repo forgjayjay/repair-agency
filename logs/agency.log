@@ -44,3 +44,47 @@ DEBUG   2022-08-23 09:27:01,749 [http-bio-9090-exec-10] com.servlet_project.dbma
 DEBUG   2022-08-23 09:27:01,757 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run userType method
 DEBUG   2022-08-23 09:27:01,758 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
 DEBUG   2022-08-23 09:27:01,800 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Checking account type
+DEBUG   2022-08-24 18:20:42,973 [http-bio-9090-exec-4] com.servlet_project.dbmanager.dbmanager  - Run validate method
+DEBUG   2022-08-24 18:20:43,193 [http-bio-9090-exec-4] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-24 18:20:47,640 [http-bio-9090-exec-4] com.servlet_project.dbmanager.dbmanager  - Checking for user in database
+DEBUG   2022-08-24 18:20:47,996 [http-bio-9090-exec-4] com.servlet_project.dbmanager.dbmanager  - Run userType method
+DEBUG   2022-08-24 18:20:48,094 [http-bio-9090-exec-4] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-24 18:20:48,439 [http-bio-9090-exec-4] com.servlet_project.dbmanager.dbmanager  - Checking account type
+DEBUG   2022-08-24 18:21:07,875 [http-bio-9090-exec-6] com.servlet_project.dbmanager.dbmanager  - Run show manager orders
+DEBUG   2022-08-24 18:21:07,876 [http-bio-9090-exec-6] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-24 18:21:07,955 [http-bio-9090-exec-6] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+ERROR   2022-08-24 18:21:08,118 [http-bio-9090-exec-6] com.servlet_project.dbmanager.dbmanager  - Error on showManagerOrder
+ERROR   2022-08-24 18:21:08,119 [http-bio-9090-exec-6] com.servlet_project.dbmanager.dbmanager  - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''ASC' limit 100' at line 1
+DEBUG   2022-08-24 18:21:11,341 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Run show manager orders
+DEBUG   2022-08-24 18:21:11,344 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-24 18:21:11,411 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+ERROR   2022-08-24 18:21:11,440 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Error on showManagerOrder
+ERROR   2022-08-24 18:21:11,450 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''ASC' limit 100' at line 1
+DEBUG   2022-08-24 18:21:12,688 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Run show manager orders
+DEBUG   2022-08-24 18:21:12,689 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-24 18:21:12,757 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+ERROR   2022-08-24 18:21:12,775 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Error on showManagerOrder
+ERROR   2022-08-24 18:21:12,777 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''DESC' limit 100' at line 1
+DEBUG   2022-08-24 18:21:15,549 [http-bio-9090-exec-9] com.servlet_project.dbmanager.dbmanager  - Run show manager orders
+DEBUG   2022-08-24 18:21:15,553 [http-bio-9090-exec-9] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-24 18:21:15,625 [http-bio-9090-exec-9] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+ERROR   2022-08-24 18:21:15,634 [http-bio-9090-exec-9] com.servlet_project.dbmanager.dbmanager  - Error on showManagerOrder
+ERROR   2022-08-24 18:21:15,635 [http-bio-9090-exec-9] com.servlet_project.dbmanager.dbmanager  - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''ASC' limit 100' at line 1
+DEBUG   2022-08-24 18:21:23,789 [http-bio-9090-exec-1] com.servlet_project.dbmanager.dbmanager  - Run appointCraftsman method
+DEBUG   2022-08-24 18:21:23,790 [http-bio-9090-exec-1] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-24 18:21:23,871 [http-bio-9090-exec-1] com.servlet_project.dbmanager.dbmanager  - Updating order
+DEBUG   2022-08-24 18:29:25,391 [http-bio-9090-exec-1] com.servlet_project.dbmanager.dbmanager  - Run show manager orders
+DEBUG   2022-08-24 18:29:25,395 [http-bio-9090-exec-1] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-24 18:29:26,884 [http-bio-9090-exec-1] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-24 18:29:26,971 [http-bio-9090-exec-1] com.servlet_project.dbmanager.dbmanager  - Displaying orders
+DEBUG   2022-08-24 18:29:31,313 [http-bio-9090-exec-2] com.servlet_project.dbmanager.dbmanager  - Run show manager orders
+DEBUG   2022-08-24 18:29:31,314 [http-bio-9090-exec-2] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-24 18:29:31,451 [http-bio-9090-exec-2] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-24 18:29:31,493 [http-bio-9090-exec-2] com.servlet_project.dbmanager.dbmanager  - Displaying orders
+DEBUG   2022-08-24 18:33:53,795 [http-bio-9090-exec-1] com.servlet_project.dbmanager.dbmanager  - Run priceOrder method
+DEBUG   2022-08-24 18:33:53,810 [http-bio-9090-exec-1] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-24 18:33:55,131 [http-bio-9090-exec-1] com.servlet_project.dbmanager.dbmanager  - Updating order
+DEBUG   2022-08-24 18:33:58,294 [http-bio-9090-exec-2] com.servlet_project.dbmanager.dbmanager  - Run show manager orders
+DEBUG   2022-08-24 18:33:58,298 [http-bio-9090-exec-2] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-24 18:33:58,392 [http-bio-9090-exec-2] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-24 18:33:58,460 [http-bio-9090-exec-2] com.servlet_project.dbmanager.dbmanager  - Displaying orders
