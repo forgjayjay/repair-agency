@@ -2,16 +2,20 @@ package com.servlet_project.user.standard_user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+import com.servlet_project.dbmanager.Order;
+
 public class user_order_handler extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-        throws ServletException, IOException {
+  
+    throws ServletException, IOException {
+        
         response.setContentType("text/html");  
         PrintWriter out = response.getWriter();  
               
@@ -56,8 +60,8 @@ public class user_order_handler extends HttpServlet {
         if(request.getParameter("showorder")!= null){
             out.println("Your orders: \n<br />");
             out.println();
-            ArrayList<String> arrayString =  userDao.showOrders(name);
-            for (String string : arrayString) {
+            HashMap<Order, String> orderMap =  userDao.showOrders(name);
+            for (String string : orderMap.values()) {
                 out.println(string + "<br />");
                 out.println();
             }
@@ -65,12 +69,35 @@ public class user_order_handler extends HttpServlet {
         if(request.getParameter("showorder_payment")!= null){
             out.println("Your unpaid orders: <br />");
             out.println();
-
-            ArrayList<String> arrayString =  userDao.showUnpaidOrders(name);
-            for (String string : arrayString) {
-                out.println(string + "<br />");
-                out.println();
-            }        
+            HashMap<Order, String> orderMap =  userDao.showUnpaidOrders(name);
+            for (Map.Entry<Order, String> entry : orderMap.entrySet()) {
+                
+                out.println(entry.getValue());
+                // Cookie cookie = new Cookie(
+                //     "orderID" + Integer.toString(entry.getKey().getId()),
+                //     Integer.toString(entry.getKey().getId()
+                // ));
+                // response.addCookie(cookie);
+                request.setAttribute("orderID", entry.getKey().getId());
+                
+                out.println("<br /><br />");
+            }       
+            RequestDispatcher orderDispatcher = request.getRequestDispatcher("payment.jsp");
+            orderDispatcher.include(request, response); 
+        }
+        if(request.getParameter("paid")!=null){
+            try {
+                if(userDao.updateOrderPaymentStatus(
+                    Integer.valueOf(request.getParameter("id")),
+                    Double.valueOf(request.getParameter("ammount"))
+                ))
+                out.println("Order " + request.getParameter("id") + " is paid for!");
+                else out.println("Something went wrong!");
+            } catch (Exception e) {
+                System.out.println(e);
+                out.println("Something went wrong!");
+            }
+            
         }
         if(request.getParameter("review") != null){
             out.println("Leave a review : <br />");

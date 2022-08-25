@@ -18,6 +18,8 @@ public class constants {
 	public static final String UPDATE_ORDER_STATUS = "update orders set order_status = ? where id = ?";
 	public static final String UPDATE_ORDER_CRFTSMN = "update orders set craftsman_id = ? where id = ?";
 	public static final String UPDATE_ORDER_PRICE = "update orders set cost = ? where id = ?";
+	public static final String UPDATE_ORDER_PAYMENT = "update orders set payment_status = '"
+	+constants.PAID_STATUS +"' , cost = ? where id = ?";
 
 
 	public static final String INSERT_USER = "insert into users values (0, ? , ?, 'user')";

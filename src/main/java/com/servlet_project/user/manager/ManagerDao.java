@@ -11,7 +11,9 @@ public class ManagerDao {
         return dbm.insertOrder(name);
     }
     public ArrayList<String> showOrders(String name){
-        arrayString = dbm.showOrder(name, "all");
+        for (String string : dbm.showOrder(name, "all").values()) {
+            arrayString.add(string);
+        }
 
         return arrayString;
     }

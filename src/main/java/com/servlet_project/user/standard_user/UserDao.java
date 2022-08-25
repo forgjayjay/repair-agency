@@ -1,23 +1,28 @@
 package com.servlet_project.user.standard_user;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
+import com.servlet_project.dbmanager.Order;
 import com.servlet_project.dbmanager.dbmanager;
 
 public class UserDao {
     dbmanager dbm = dbmanager.getInstance();
-    ArrayList<String> arrayString = new ArrayList<>();
+    HashMap<Order, String> orderMap = new HashMap<>();
     public boolean insertOrder(String name){
         return dbm.insertOrder(name);
     }
-    public ArrayList<String> showOrders(String name){
-        arrayString = dbm.showOrder(name, "all");
+    public HashMap<Order, String> showOrders(String name){
+        orderMap = dbm.showOrder(name, "all");
 
-        return arrayString;
+        return orderMap;
     }
-    public ArrayList<String> showUnpaidOrders(String name){
-        arrayString = dbm.showOrder(name, "unpaid");
+    public HashMap<Order, String> showUnpaidOrders(String name){
+        orderMap = dbm.showOrder(name, "unpaid");
 
-        return arrayString;
+        return orderMap;
+    }
+
+    public boolean updateOrderPaymentStatus(int id, double cost){
+        return dbm.updateOrderPaymentStatus(id, cost);
     }
 }

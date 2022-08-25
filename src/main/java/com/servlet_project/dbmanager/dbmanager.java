@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Properties;
 import org.apache.log4j.Logger;
 
@@ -264,7 +265,7 @@ public class dbmanager {
             } 
         return status;  
     }
-    public ArrayList<String> showOrder(String name, String type){  
+    public LinkedHashMap<Order, String> showOrder(String name, String type){  
 
         logger.debug("Run show order");
         ResultSet rs = null;
@@ -272,6 +273,7 @@ public class dbmanager {
         String str = "";
         //String craftsman_unassigned = "unassinged";
         ArrayList<String> stringArray = new ArrayList<>();
+        LinkedHashMap<Order, String> map = new LinkedHashMap<>();
         try(
             Connection con = DriverManager.getConnection(getUrlToDB());
         ){  
@@ -281,7 +283,7 @@ public class dbmanager {
              rs = ps.executeQuery();  
             if( rs.next()){
                 userID = rs.getInt(1);
-            } else return new ArrayList<String>();
+            } else return new LinkedHashMap<>();
             ps.close();
             String statement = "";
             if(type.equals("all")){
@@ -297,7 +299,8 @@ public class dbmanager {
             rs = ps.executeQuery(); 
             logger.debug("Displaying orders");
             while(rs.next()){
-                str = " <br />Order number: " + Integer.toString(rs.getInt("id")) + "";
+                int id = rs.getInt("id");
+                str = " <br />Order number: " + id + "";
                 //str += " <br />User: " + Integer.toString(rs.getInt("user_id"))+"";
                 //if(rs.getInt("craftsman_id") == 1) str += " \nCraftsman: " + craftsman_unassigned+"\n";
                 //else str += " <br />Craftsman: " + Integer.toString(rs.getInt("craftsman_id"))+"";
@@ -305,14 +308,16 @@ public class dbmanager {
                 str += " <br />Payment status: " + rs.getString("payment_status") + "";
                 if(!(rs.getDouble("cost") < 1)) str += "<br />Cost: " + rs.getString("cost") + "";
                 str += "<br /><br /><br />";
+                map.put(new Order(id), str);
                 stringArray.add(str);
             }
+            
             rs.close();
             }catch(Exception e){ 
             logger.error("Error on showOrder");
             logger.error(e);
         } 
-        return stringArray;  
+        return map;  
     }
     public ArrayList<String> showManagerOrders(String type){  
 
@@ -417,6 +422,8 @@ public class dbmanager {
         try(
             Connection con = DriverManager.getConnection(getUrlToDB());
         ){  
+            logger.debug("Looking for order");
+
             PreparedStatement ps = con.prepareStatement(
                 constants.SHOW_ORDER
             );
@@ -426,23 +433,66 @@ public class dbmanager {
                 craftsmanID = rs.getInt(3);
             } else return false;
             ps.close();
+            logger.debug("Looking if craftsman is assigned to current order");
             ps = con.prepareStatement(
                 constants.FIND_USER
             );
             ps.setString(1, name);
+            logger.debug("Executing the search");
             rs = ps.executeQuery();
             if( rs.next()){
                 currentID = rs.getInt(1);
             } else return false;
-            if(currentID == craftsmanID) return false;
-            logger.debug("Looking up order");
+            if(currentID != craftsmanID) return false;
+            logger.debug("Updating order");
             ps = con.prepareStatement(constants.UPDATE_ORDER_STATUS);
             ps.setString(1, order_status);
             ps.setInt(2, id);
             i += ps.executeUpdate();  
             status = i > 0;
             }catch(Exception e){ 
+                logger.error(e); 
                 logger.error("Error on updateOrderStatus"); 
+            } 
+        return status;  
+    }
+    public boolean updateOrderPaymentStatus(int id, Double cost){  
+        logger.debug("Run update order payment status method");
+        int i = 0;
+        boolean status=false; 
+        Double currentCost = 0.0;
+        try(
+            Connection con = DriverManager.getConnection(getUrlToDB());
+        ){  
+            logger.debug("Looking for orders");
+            PreparedStatement ps = con.prepareStatement(
+                constants.SHOW_ORDER
+            );
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();  
+            if( rs.next()){
+                currentCost = rs.getDouble(6);
+            } else return false;
+            logger.debug("Cheking the cost");
+            Double updatedCost = currentCost-cost;
+            if(updatedCost>0){
+                return status;
+            }else updatedCost = 0.0;
+            ps.close();
+            logger.debug("Updating order");
+            ps = con.prepareStatement(
+                constants.UPDATE_ORDER_PAYMENT
+            );
+            logger.debug("Changing the cost");
+            ps.setDouble(1, updatedCost);
+            logger.debug("Inserting id");
+            ps.setInt(2, id);
+            logger.debug("Executing update");
+            i = ps.executeUpdate();
+            status = i > 0;
+            }catch(Exception e){ 
+                logger.error(e); 
+                logger.error("Error on updateOrderPaymentStatus"); 
             } 
         return status;  
     }
@@ -459,7 +509,12 @@ public class dbmanager {
             while(rs.next()){
                 type = rs.getString("acc_type");
             }
-        } catch(Exception e){ logger.debug("Error on userType"); }  
+        } catch(Exception e){ 
+            logger.error(e); 
+
+            logger.debug("Error on userType"); 
+        
+        }  
         return type;
     }
     public boolean validate(String name,String pass){
