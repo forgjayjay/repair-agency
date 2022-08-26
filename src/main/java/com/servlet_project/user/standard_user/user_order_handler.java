@@ -70,26 +70,24 @@ public class user_order_handler extends HttpServlet {
             out.println("Your unpaid orders: <br />");
             out.println();
             HashMap<Order, String> orderMap =  userDao.showUnpaidOrders(name);
-            for (Map.Entry<Order, String> entry : orderMap.entrySet()) {
-                
-                out.println(entry.getValue());
-                // Cookie cookie = new Cookie(
-                //     "orderID" + Integer.toString(entry.getKey().getId()),
-                //     Integer.toString(entry.getKey().getId()
-                // ));
-                // response.addCookie(cookie);
-                request.setAttribute("orderID", entry.getKey().getId());
-                
+            for (Map.Entry<Order, String> order : orderMap.entrySet()) {
+                out.println(order.getValue());
+                request.setAttribute("orderID", order.getKey());
+                request.getSession().setAttribute("orderID", order.getKey());
+                this.getServletConfig()
+                    .getServletContext()
+                    .setAttribute("orderID",  order.getKey());
+                RequestDispatcher orderDispatcher = request.getRequestDispatcher("paymentObject.jsp");
+                orderDispatcher.include(request, response); 
                 out.println("<br /><br />");
             }       
-            RequestDispatcher orderDispatcher = request.getRequestDispatcher("payment.jsp");
-            orderDispatcher.include(request, response); 
+            
         }
         if(request.getParameter("paid")!=null){
             try {
                 if(userDao.updateOrderPaymentStatus(
                     Integer.valueOf(request.getParameter("id")),
-                    Double.valueOf(request.getParameter("ammount"))
+                    Double.valueOf(request.getParameter("cost"))
                 ))
                 out.println("Order " + request.getParameter("id") + " is paid for!");
                 else out.println("Something went wrong!");

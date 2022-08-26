@@ -8,9 +8,6 @@ package com.servlet_project.dbmanager;
 
 public class constants {
     private constants() {}
-	public static final String PAYMENT = "dbconnection.properties";
-
-
 	public static final String SETTINGS_FILE = "dbconnection.properties";
 	public static final String VALIDATE_USER = "select * from users where login = ? and passwrd = ?";
 	public static final String FIND_USER = "select * from users where login = ?";
