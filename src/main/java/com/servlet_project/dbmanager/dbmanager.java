@@ -319,13 +319,13 @@ public class dbmanager {
         } 
         return map;  
     }
-    public ArrayList<String> showManagerOrders(String type){  
+    public LinkedHashMap<Order, String> showManagerOrders(String type){  
 
         logger.debug("Run show manager orders");
         ResultSet rs = null;
         String str = "";
         String craftsman_unassigned = "unassinged";
-        ArrayList<String> stringArray = new ArrayList<>();
+        LinkedHashMap<Order, String> orderMap = new LinkedHashMap<>();
         try(
             Connection con = DriverManager.getConnection(getUrlToDB());
         ){  
@@ -342,29 +342,31 @@ public class dbmanager {
             rs = ps.executeQuery(); 
             logger.debug("Displaying orders");
             while(rs.next()){
-                str = " <br />Order number: " + Integer.toString(rs.getInt("id")) + "";
+                int id = rs.getInt("id");
+                Double cost = rs.getDouble("cost");
+                str = " <br />Order number: " + id + "";
                 str += " <br />User: " + Integer.toString(rs.getInt("user_id"))+"";
                 if(rs.getInt("craftsman_id") == 1) str += " \nCraftsman: " + craftsman_unassigned+"\n";
                 else str += " <br />Craftsman: " + Integer.toString(rs.getInt("craftsman_id"))+"";
                 str += " <br />Order status: " + rs.getString("order_status")+"";
                 str += " <br />Payment status: " + rs.getString("payment_status") + "";
-                if(!(rs.getDouble("cost") < 1)) str += "<br />Cost: " + rs.getString("cost") + "";
+                if(!(rs.getDouble("cost") < 1)) str += "<br />Cost: " + cost + "";
                 str += "<br /><br /><br />";
-                stringArray.add(str);
+                orderMap.put(new Order(id, cost), str);
             }
             rs.close();
             }catch(Exception e){ 
             logger.error("Error on showManagerOrder");
             logger.error(e);
         } 
-        return stringArray;  
+        return orderMap;  
     }
-    public ArrayList<String> showCraftsmanOrder(String name){  
+    public LinkedHashMap<Order, String> showCraftsmanOrder(String name){  
         logger.debug("Run show craftsman order");
         ResultSet rs = null;
         int userID = 0;
         String str = "";
-        ArrayList<String> arrayString = new ArrayList<>();
+        LinkedHashMap<Order, String> orderMap = new LinkedHashMap<>();
         try(
             Connection con = DriverManager.getConnection(getUrlToDB());
         ){  
@@ -374,7 +376,7 @@ public class dbmanager {
              rs = ps.executeQuery();  
             if( rs.next()){
                 userID = rs.getInt(1);
-            } else return new ArrayList<>();
+            } else return new LinkedHashMap<>();
             ps.close();
             
             ps = con.prepareStatement(
@@ -386,10 +388,12 @@ public class dbmanager {
             logger.debug("Displaying orders");
             if(!rs.next()){
                 str = "No assigned orders are present";
-                arrayString.add(str);
+                orderMap.put(new Order(0, 0.0), str);
             } else {
                 do{
-                    str = "<br />Order number: " + Integer.toString(rs.getInt("id")) + "";
+                    int id = rs.getInt("id");
+                    
+                    str = "<br />Order number: " + id + "";
                     
                     str += "<br />User: " + Integer.toString(rs.getInt("user_id"))+"";
                     
@@ -398,19 +402,15 @@ public class dbmanager {
                     
                     str += "<br />Payment status: " + rs.getString("payment_status") + "";
 
-                    str+="<br /><br /><br />";
-                    arrayString.add(str);
+                    orderMap.put(new Order(id, 0.0), str);
                 }while(rs.next());
             }
-            
-            
-            
             rs.close();
             }catch(Exception e){
                 logger.error("Error on showCraftsmanOrder"); 
                 logger.error(e);
             } 
-        return arrayString;  
+        return orderMap;  
     }
     public boolean updateOrderStatus(String order_status, int id, String name){  
         logger.debug("Run update order status method");

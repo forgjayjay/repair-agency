@@ -2,11 +2,14 @@ package com.servlet_project.user.manager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
+
+import com.servlet_project.dbmanager.Order;
 
 public class manager_order_handler extends HttpServlet {
     @Override
@@ -49,18 +52,23 @@ public class manager_order_handler extends HttpServlet {
         String login=request.getParameter("username");
         String realname=request.getParameter("name");
         if(request.getParameter("showorder")!=null) {
-            ArrayList<String> arrayString;
+            HashMap<Order, String> orderMap;
             if(request.getParameter("desc") == null) {
-                arrayString = managerDao.showAllOrdersAsc();
+                orderMap = managerDao.showAllOrdersAsc();
             }
             else{ 
-                arrayString = managerDao.showAllOrdersDesc();
+                orderMap = managerDao.showAllOrdersDesc();
             }
             out.println("All available orders:<br />");
-            for (String string : arrayString) {
-                out.println(string + "<br />");
-                out.println();
-            }
+            for (Map.Entry<Order, String> order : orderMap.entrySet()) {
+                out.println(order.getValue());
+                request.setAttribute("orderID", order.getKey());
+                request.getSession().setAttribute("orderID", order.getKey());
+                this.getServletConfig()
+                    .getServletContext()
+                    .setAttribute("orderID",  order.getKey());
+                out.println("<br /><br />");
+            }    
         }
         if(request.getParameter("appoint")!=null) {
             RequestDispatcher reqdisp = request.getRequestDispatcher("appoint_craftsman.jsp");

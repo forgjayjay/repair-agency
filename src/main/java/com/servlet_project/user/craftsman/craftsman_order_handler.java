@@ -2,12 +2,14 @@ package com.servlet_project.user.craftsman;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+import com.servlet_project.dbmanager.Order;
 import com.servlet_project.dbmanager.constants;
 
 public class craftsman_order_handler extends HttpServlet {
@@ -44,30 +46,36 @@ public class craftsman_order_handler extends HttpServlet {
         }
         out.println("\n<h2>Welcome, to craftsman page, " + name + "</h2>\n");
 
-        RequestDispatcher rd = request.getRequestDispatcher("order_status_update.jsp"); 
-        rd.include(request, response);
-        rd=request.getRequestDispatcher("craftsman_page.jsp"); 
+        RequestDispatcher rd = request.getRequestDispatcher("craftsman_page.jsp"); 
         rd.include(request,response); 
         if(request.getParameter("show")!= null){
             
 
             out.println("Your assigned orders: <br />");
             out.println();
-            ArrayList<String> arrayString = craftsmanDao.showOrders(name);
-            for (String string : arrayString) {
-                out.println(string + "<br />");
-                out.println();
-            }
+            HashMap<Order, String> orderMap = craftsmanDao.showOrders(name);
+            for (Map.Entry<Order, String> order : orderMap.entrySet()) {
+                out.println(order.getValue());
+                if(order.getValue().equals("No assigned orders are present")) break;
+                request.setAttribute("orderID", order.getKey());
+                request.getSession().setAttribute("orderID", order.getKey());
+                this.getServletConfig()
+                    .getServletContext()
+                    .setAttribute("orderID",  order.getKey());
+                RequestDispatcher orderDispatcher = request.getRequestDispatcher("order_status_update.jsp");
+                orderDispatcher.include(request, response); 
+                out.println("<br /><br />");
+            }       
 
-        } else if (request.getParameter("id") != null){
-            String id = request.getParameter("id");
+        } else if (request.getParameter("orderID") != null){
+            String id = request.getParameter("orderID");
             if(request.getParameter("finished") != null){
                 try {
                     if(craftsmanDao.updateOrder(constants.ORDER_STATUS_DONE, Integer.valueOf(id), name)){
                         out.println("Successfully updated!");
                     }else out.println("Something went wrong!");
                 } catch (Exception e) {
-                    out.println("<br/ ><h2>Something went wrong! Maybe try entering correct order id!</h2><br/ >");
+                    out.println("<br/ >Something went wrong! Maybe try entering correct order id!<br/ >");
                 }
             } else{
                 try {
@@ -75,7 +83,7 @@ public class craftsman_order_handler extends HttpServlet {
                         out.println("Successfully updated!");
                     }else out.println("Something went wrong!");
                 } catch (Exception e) {
-                    out.println("<br/ ><h2>Something went wrong! Maybe try entering correct order id!</h2><br/ >");
+                    out.println("<br/ >Something went wrong! Maybe try entering correct order id!<br/ >");
                 }
             }
         }

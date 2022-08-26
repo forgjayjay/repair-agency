@@ -41,9 +41,7 @@ public class craftsman_page extends HttpServlet {
         }
         
         out.println("\n<h2>Welcome, to craftsman page, " + n + "</h2>\n");
-        RequestDispatcher rd = request.getRequestDispatcher("order_status_update.jsp"); 
-        rd.include(request, response);
-        rd=request.getRequestDispatcher("craftsman_page.jsp"); 
+        RequestDispatcher rd = request.getRequestDispatcher("craftsman_page.jsp"); 
         rd.include(request,response);  
 
         
