@@ -79,6 +79,10 @@ public class user_order_handler extends HttpServlet {
                     .setAttribute("orderID",  order.getKey());
                 RequestDispatcher orderDispatcher = request.getRequestDispatcher("paymentObject.jsp");
                 orderDispatcher.include(request, response); 
+                if(!order.getKey().isReviewed()){
+                    orderDispatcher = request.getRequestDispatcher("reviewCraftsman.jsp");
+                    orderDispatcher.include(request, response);
+                }
                 out.println("<br /><br />");
             }       
             
@@ -98,7 +102,15 @@ public class user_order_handler extends HttpServlet {
             
         }
         if(request.getParameter("review") != null){
-            out.println("Leave a review : <br />");
+            try {
+                int craftsmanID = userDao.getCraftsmanId(Integer.valueOf(request.getParameter("id")));
+                if(userDao.orderReview(craftsmanID, Integer.valueOf(request.getParameter("rating")))){
+                    out.println("Success!");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+                out.println("Something went wrong!");
+            }
         }
         out.close();  
     }  

@@ -267,7 +267,7 @@ public class dbmanager {
     }
     public LinkedHashMap<Order, String> showOrder(String name, String type){  
 
-        logger.debug("Run show order");
+        logger.debug("Run showOrder");
         ResultSet rs = null;
         int userID = 0;
         String str = "";
@@ -297,18 +297,19 @@ public class dbmanager {
             
             rs = ps.executeQuery(); 
             logger.debug("Displaying orders");
+            int id;
+            Double cost;
+            boolean reviewed;
             while(rs.next()){
-                int id = rs.getInt("id");
-                Double cost = rs.getDouble("cost");
+                id = rs.getInt("id");
+                cost = rs.getDouble("cost");
+                reviewed = rs.getBoolean("reviewed");
                 str = " <br />Order number: " + id + "";
-                //str += " <br />User: " + Integer.toString(rs.getInt("user_id"))+"";
-                //if(rs.getInt("craftsman_id") == 1) str += " \nCraftsman: " + craftsman_unassigned+"\n";
-                //else str += " <br />Craftsman: " + Integer.toString(rs.getInt("craftsman_id"))+"";
                 str += " <br />Order status: " + rs.getString("order_status")+"";
                 str += " <br />Payment status: " + rs.getString("payment_status") + "";
                 if(!(cost < 1)) str += "<br />Cost: " + cost + "";
-                str += "<br /><br /><br />";
-                map.put(new Order(id, cost), str);
+                str += "<br /><br />";
+                map.put(new Order(id, cost, reviewed), str);
                 stringArray.add(str);
             }
             
@@ -341,9 +342,13 @@ public class dbmanager {
             
             rs = ps.executeQuery(); 
             logger.debug("Displaying orders");
+            int id;
+            Double cost;
+            boolean reviewed;
             while(rs.next()){
-                int id = rs.getInt("id");
-                Double cost = rs.getDouble("cost");
+                id = rs.getInt("id");
+                cost = rs.getDouble("cost");
+                reviewed = rs.getBoolean("reviewed");
                 str = " <br />Order number: " + id + "";
                 str += " <br />User: " + Integer.toString(rs.getInt("user_id"))+"";
                 if(rs.getInt("craftsman_id") == 1) str += " \nCraftsman: " + craftsman_unassigned+"\n";
@@ -352,7 +357,7 @@ public class dbmanager {
                 str += " <br />Payment status: " + rs.getString("payment_status") + "";
                 if(!(rs.getDouble("cost") < 1)) str += "<br />Cost: " + cost + "";
                 str += "<br /><br /><br />";
-                orderMap.put(new Order(id, cost), str);
+                orderMap.put(new Order(id, cost, reviewed), str);
             }
             rs.close();
             }catch(Exception e){ 
@@ -388,7 +393,7 @@ public class dbmanager {
             logger.debug("Displaying orders");
             if(!rs.next()){
                 str = "No assigned orders are present";
-                orderMap.put(new Order(0, 0.0), str);
+                orderMap.put(new Order(0, 0.0, true), str);
             } else {
                 do{
                     int id = rs.getInt("id");
@@ -402,7 +407,7 @@ public class dbmanager {
                     
                     str += "<br />Payment status: " + rs.getString("payment_status") + "";
 
-                    orderMap.put(new Order(id, 0.0), str);
+                    orderMap.put(new Order(id, 0.0, false), str);
                 }while(rs.next());
             }
             rs.close();
@@ -495,6 +500,64 @@ public class dbmanager {
                 logger.error("Error on updateOrderPaymentStatus"); 
             } 
         return status;  
+    }
+
+    public boolean orderReview(int id, int review){
+        logger.debug("Running orderReview method");
+        boolean status = false;
+        int review_number = 0;
+        double rating = 0.0;
+        try(
+            Connection con = DriverManager.getConnection(getUrlToDB());
+        ) {
+            logger.debug("Looking for craftsman to see rating");
+            PreparedStatement ps = con.prepareStatement(constants.SHOW_CRAFTSMAN);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                rating = rs.getDouble("rating");
+                review_number = rs.getInt(4);
+            }
+            logger.debug("Calculating new rating");
+            rating *= review_number;
+            review_number++;
+            rating += review;
+            rating/=review_number;
+            
+            logger.debug("Updating craftsman to match new rating");
+            ps = con.prepareStatement(constants.UPDATE_CRAFTSMAN_RATING);
+            ps.setDouble(1, rating);
+            ps.setInt(2, review_number);
+            ps.setInt(3, id);
+            status = ps.executeUpdate()>0;
+        } catch (Exception e) {
+            logger.error(e);
+            logger.error("Error on orderReview method");
+        }
+        return status;
+    }
+    public int getCraftsmanId(int orderID){
+        logger.debug("Running getCraftsmanId method");
+        
+        int craftsmanID = 0;
+        try(
+            Connection con = DriverManager.getConnection(getUrlToDB());
+        ) {
+            logger.debug("Looking for order to get assigned craftsman id");
+            PreparedStatement ps = con.prepareStatement(constants.SHOW_ORDER);
+            ps.setInt(1, orderID);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                craftsmanID = rs.getInt(3);
+            }
+            ps = con.prepareStatement(constants.UPDATE_ORDER_REVIEW);
+            ps.setInt(1, orderID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            logger.error(e);
+            logger.error("Error on getCraftsmanId method");
+        }
+        return craftsmanID;
     }
     public String userType(String name){
         logger.debug("Run userType method");

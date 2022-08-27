@@ -25,4 +25,10 @@ public class UserDao {
     public boolean updateOrderPaymentStatus(int id, double cost){
         return dbm.updateOrderPaymentStatus(id, cost);
     }
+    public int getCraftsmanId(int orderID){
+        return dbm.getCraftsmanId(orderID);
+    }
+    public boolean orderReview(int id, int review){
+        return dbm.orderReview(id, review);
+    }
 }

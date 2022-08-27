@@ -15,19 +15,22 @@ public class constants {
 	public static final String UPDATE_ORDER_STATUS = "update orders set order_status = ? where id = ?";
 	public static final String UPDATE_ORDER_CRFTSMN = "update orders set craftsman_id = ? where id = ?";
 	public static final String UPDATE_ORDER_PRICE = "update orders set cost = ? where id = ?";
+	public static final String UPDATE_ORDER_REVIEW = "update orders set reviewed = true where id = ?";
+
 	public static final String UPDATE_ORDER_PAYMENT = "update orders set payment_status = '"
 	+constants.PAID_STATUS +"' , cost = ? where id = ?";
+	public static final String UPDATE_CRAFTSMAN_RATING = "update craftsmen set rating = ? , review_number = ? where id = ?";
 
 
 	public static final String INSERT_USER = "insert into users values (0, ? , ?, 'user')";
 	public static final String INSERT_MNGR = "insert into users values (0, ? , ?, 'manager')";
 	public static final String INSERT_CRFTSMN = "insert into users values (0, ? , ?, 'craftsman')";
-	public static final String INSERT_INTO_CRFTSMN = "insert into craftsmen values (?, ?, 0)";
-	public static final String INSERT_NEW_ORDER = "insert into orders values (0, ?, 1, ?, ?, 0)";
+	public static final String INSERT_INTO_CRFTSMN = "insert into craftsmen values (?, ?, 0, 0)";
+	public static final String INSERT_NEW_ORDER = "insert into orders values (0, ?, 1, ?, ?, 0, false)";
 	
 	public static final String SHOW_MANAGER_ORDERS_DESC = "select * from orders order by id DESC limit 100";
 	public static final String SHOW_MANAGER_ORDERS_ASC = "select * from orders order by id ASC limit 100";
-
+	public static final String SHOW_CRAFTSMAN = "select * from craftsmen where id = ?";
 	public static final String SHOW_ALL_ORDERS = "select * from orders where user_id = ?";
 	public static final String SHOW_ORDER = "select * from orders where id = ?";
 	public static final String SHOW_ORDER_CRFTSMN = "select * from orders where craftsman_id = ?";
