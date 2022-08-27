@@ -300,16 +300,18 @@ public class dbmanager {
             int id;
             Double cost;
             boolean reviewed;
+            boolean completed;
             while(rs.next()){
                 id = rs.getInt("id");
                 cost = rs.getDouble("cost");
                 reviewed = rs.getBoolean("reviewed");
+                completed = rs.getString(4).equals(constants.ORDER_STATUS_DONE);
                 str = " <br />Order number: " + id + "";
                 str += " <br />Order status: " + rs.getString("order_status")+"";
                 str += " <br />Payment status: " + rs.getString("payment_status") + "";
                 if(!(cost < 1)) str += "<br />Cost: " + cost + "";
                 str += "<br /><br />";
-                map.put(new Order(id, cost, reviewed), str);
+                map.put(new Order(id, cost, reviewed, completed), str);
                 stringArray.add(str);
             }
             
@@ -345,10 +347,12 @@ public class dbmanager {
             int id;
             Double cost;
             boolean reviewed;
+            boolean completed;
             while(rs.next()){
                 id = rs.getInt("id");
                 cost = rs.getDouble("cost");
                 reviewed = rs.getBoolean("reviewed");
+                completed = rs.getString(4).equals(constants.ORDER_STATUS_DONE);
                 str = " <br />Order number: " + id + "";
                 str += " <br />User: " + Integer.toString(rs.getInt("user_id"))+"";
                 if(rs.getInt("craftsman_id") == 1) str += " \nCraftsman: " + craftsman_unassigned+"\n";
@@ -357,7 +361,7 @@ public class dbmanager {
                 str += " <br />Payment status: " + rs.getString("payment_status") + "";
                 if(!(rs.getDouble("cost") < 1)) str += "<br />Cost: " + cost + "";
                 str += "<br /><br /><br />";
-                orderMap.put(new Order(id, cost, reviewed), str);
+                orderMap.put(new Order(id, cost, reviewed, completed), str);
             }
             rs.close();
             }catch(Exception e){ 
@@ -393,7 +397,7 @@ public class dbmanager {
             logger.debug("Displaying orders");
             if(!rs.next()){
                 str = "No assigned orders are present";
-                orderMap.put(new Order(0, 0.0, true), str);
+                orderMap.put(new Order(0, 0.0, true, false), str);
             } else {
                 do{
                     int id = rs.getInt("id");
@@ -407,7 +411,7 @@ public class dbmanager {
                     
                     str += "<br />Payment status: " + rs.getString("payment_status") + "";
 
-                    orderMap.put(new Order(id, 0.0, false), str);
+                    orderMap.put(new Order(id, 0.0, false, true), str);
                 }while(rs.next());
             }
             rs.close();

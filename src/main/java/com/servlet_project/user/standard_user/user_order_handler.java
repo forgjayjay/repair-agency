@@ -79,7 +79,7 @@ public class user_order_handler extends HttpServlet {
                     .setAttribute("orderID",  order.getKey());
                 RequestDispatcher orderDispatcher = request.getRequestDispatcher("paymentObject.jsp");
                 orderDispatcher.include(request, response); 
-                if(!order.getKey().isReviewed()){
+                if(!order.getKey().isReviewed() && order.getKey().getCompleted()){
                     orderDispatcher = request.getRequestDispatcher("reviewCraftsman.jsp");
                     orderDispatcher.include(request, response);
                 }
