@@ -10,7 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 import com.servlet_project.dbmanager.Order;
-import com.servlet_project.dbmanager.constants;
+import com.servlet_project.dbmanager.Constants;
+import com.servlet_project.login.LoginDao;
 
 public class craftsman_order_handler extends HttpServlet {
     @Override
@@ -18,11 +19,21 @@ public class craftsman_order_handler extends HttpServlet {
         throws ServletException, IOException {
         response.setContentType("text/html");  
         PrintWriter out = response.getWriter();  
-              
-        out.print("Please, login first");  
-        RequestDispatcher rd=request.getRequestDispatcher("login_page.jsp");  
-        rd.forward(request,response);    
-              
+        Cookie cookies[] = request.getCookies();
+        String name ="", pass="";
+        if(cookies!=null){
+            for(Cookie cookie : cookies ){
+                if(cookie.getName().equals("login")) {
+                    name = cookie.getValue();
+                }
+                if(cookie.getName().equals("pass")) {
+                    pass = cookie.getValue();
+                }
+            }
+            LoginDao validator = new LoginDao();
+            if(validator.validate(name, pass) && validator.userType(name).equals("craftsman")) doPost(request, response);
+            else response.sendRedirect(request.getContextPath()+ "/Login");
+        } else response.sendRedirect(request.getContextPath()+ "/Login");
         out.close();      
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response)  
@@ -71,7 +82,7 @@ public class craftsman_order_handler extends HttpServlet {
             String id = request.getParameter("orderID");
             if(request.getParameter("finished") != null){
                 try {
-                    if(craftsmanDao.updateOrder(constants.ORDER_STATUS_DONE, Integer.valueOf(id), name)){
+                    if(craftsmanDao.updateOrder(Constants.ORDER_STATUS_DONE, Integer.valueOf(id), name)){
                         out.println("Successfully updated!");
                     }else out.println("Something went wrong!");
                 } catch (Exception e) {
@@ -79,7 +90,7 @@ public class craftsman_order_handler extends HttpServlet {
                 }
             } else{
                 try {
-                    if(craftsmanDao.updateOrder(constants.ORDER_STATUS_WORKING, Integer.valueOf(id), name)){
+                    if(craftsmanDao.updateOrder(Constants.ORDER_STATUS_WORKING, Integer.valueOf(id), name)){
                         out.println("Successfully updated!");
                     }else out.println("Something went wrong!");
                 } catch (Exception e) {

@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 import com.servlet_project.dbmanager.Order;
+import com.servlet_project.login.LoginDao;
 
 public class manager_order_handler extends HttpServlet {
     @Override
@@ -17,12 +18,22 @@ public class manager_order_handler extends HttpServlet {
         throws ServletException, IOException {
         response.setContentType("text/html");  
         PrintWriter out = response.getWriter();  
-              
-        out.print("Please, login first");  
-        RequestDispatcher rd=request.getRequestDispatcher("login_page.jsp");  
-        rd.include(request,response);    
-              
-        out.close();      
+        Cookie cookies[] = request.getCookies();
+        String name ="", pass="";
+        if(cookies!=null){
+            for(Cookie cookie : cookies ){
+                if(cookie.getName().equals("login")) {
+                    name = cookie.getValue();
+                }
+                if(cookie.getName().equals("pass")) {
+                    pass = cookie.getValue();
+                }
+            }
+            LoginDao validator = new LoginDao();
+            if(validator.validate(name, pass) && validator.userType(name).equals("manager")) doPost(request, response);
+            else response.sendRedirect(request.getContextPath()+ "/Login");
+        } else response.sendRedirect(request.getContextPath()+ "/Login");   
+        out.close();
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response)  
         throws ServletException, IOException {  

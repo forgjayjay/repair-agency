@@ -1,9 +1,9 @@
 package com.servlet_project.user.admin;
 
-import com.servlet_project.dbmanager.dbmanager;
+import com.servlet_project.dbmanager.DBManager;
 
 public class AdminDao {
-    dbmanager dbm = dbmanager.getInstance();
+    DBManager dbm = DBManager.getInstance();
     public boolean insertManager(String name,String pass){
         return dbm.insertManager(name, pass);
     }

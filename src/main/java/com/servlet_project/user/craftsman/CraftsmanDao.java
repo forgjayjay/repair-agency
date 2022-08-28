@@ -3,10 +3,10 @@ package com.servlet_project.user.craftsman;
 import java.util.HashMap;
 
 import com.servlet_project.dbmanager.Order;
-import com.servlet_project.dbmanager.dbmanager;
+import com.servlet_project.dbmanager.DBManager;
 
 public class CraftsmanDao {
-    dbmanager dbm = dbmanager.getInstance();
+    DBManager dbm = DBManager.getInstance();
     public boolean insertOrder(String name){
         return dbm.insertOrder(name);
     }

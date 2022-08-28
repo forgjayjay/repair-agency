@@ -3,10 +3,10 @@ package com.servlet_project.user.standard_user;
 import java.util.HashMap;
 
 import com.servlet_project.dbmanager.Order;
-import com.servlet_project.dbmanager.dbmanager;
+import com.servlet_project.dbmanager.DBManager;
 
 public class UserDao {
-    dbmanager dbm = dbmanager.getInstance();
+    DBManager dbm = DBManager.getInstance();
     HashMap<Order, String> orderMap = new HashMap<>();
     public boolean insertOrder(String name){
         return dbm.insertOrder(name);

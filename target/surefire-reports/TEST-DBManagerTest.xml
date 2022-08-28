@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="DBManagerTest" time="2.175" tests="10" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\forg\Desktop\repair agency servlet\repair-agency\target\test-classes;C:\Users\forg\Desktop\repair agency servlet\repair-agency\target\classes;C:\Users\forg\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.0\junit-jupiter-api-5.9.0.jar;C:\Users\forg\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\forg\.m2\repository\org\junit\platform\junit-platform-commons\1.9.0\junit-platform-commons-1.9.0.jar;C:\Users\forg\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\forg\.m2\repository\javax\servlet\javax.servlet-api\4.0.1\javax.servlet-api-4.0.1.jar;C:\Users\forg\.m2\repository\mysql\mysql-connector-java\8.0.29\mysql-connector-java-8.0.29.jar;C:\Users\forg\.m2\repository\com\google\protobuf\protobuf-java\3.19.4\protobuf-java-3.19.4.jar;C:\Users\forg\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;C:\Users\forg\.m2\repository\javax\servlet\jstl\1.2\jstl-1.2.jar;C:\Users\forg\.m2\repository\taglibs\standard\1.1.2\standard-1.1.2.jar;"/>
+    <property name="java.vm.vendor" value="Eclipse Adoptium"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="user.timezone" value="Europe/Berlin"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.4.8-hotspot\bin"/>
+    <property name="sun.java.command" value="C:\Users\forg\AppData\Local\Temp\surefire13047386427821438927\surefirebooter16732586173083235212.jar C:\Users\forg\AppData\Local\Temp\surefire13047386427821438927 2022-08-28T23-34-11_048-jvmRun1 surefire8424206921439984827tmp surefire_011435139976196669264tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\forg\Desktop\repair agency servlet\repair-agency\target\test-classes;C:\Users\forg\Desktop\repair agency servlet\repair-agency\target\classes;C:\Users\forg\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.0\junit-jupiter-api-5.9.0.jar;C:\Users\forg\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\forg\.m2\repository\org\junit\platform\junit-platform-commons\1.9.0\junit-platform-commons-1.9.0.jar;C:\Users\forg\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\forg\.m2\repository\javax\servlet\javax.servlet-api\4.0.1\javax.servlet-api-4.0.1.jar;C:\Users\forg\.m2\repository\mysql\mysql-connector-java\8.0.29\mysql-connector-java-8.0.29.jar;C:\Users\forg\.m2\repository\com\google\protobuf\protobuf-java\3.19.4\protobuf-java-3.19.4.jar;C:\Users\forg\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;C:\Users\forg\.m2\repository\javax\servlet\jstl\1.2\jstl-1.2.jar;C:\Users\forg\.m2\repository\taglibs\standard\1.1.2\standard-1.1.2.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\forg"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2022-07-19"/>
+    <property name="java.home" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.4.8-hotspot"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\forg\Desktop\repair agency servlet\repair-agency"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\forg\AppData\Local\Temp\surefire13047386427821438927\surefirebooter16732586173083235212.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.4+8"/>
+    <property name="user.name" value="forg"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Temurin-17.0.4+8"/>
+    <property name="localRepository" value="C:\Users\forg\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="java.io.tmpdir" value="C:\Users\forg\AppData\Local\Temp\"/>
+    <property name="java.version" value="17.0.4"/>
+    <property name="user.dir" value="C:\Users\forg\Desktop\repair agency servlet\repair-agency"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.4.8-hotspot\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Eclipse Adoptium\jdk-17.0.4.8-hotspot\bin;C:\Apache Maven\apache-maven-3.8.6\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Git\cmd;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\forg\AppData\Local\Microsoft\WindowsApps;C:\Users\forg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Apache Maven\apache-maven-3.8.6\bin;;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Eclipse Adoptium"/>
+    <property name="java.vm.version" value="17.0.4+8"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="DBManagerTest.testAppointCraftsman" classname="DBManagerTest" time="1.399"/>
+  <testcase name="DBManagerTest.testInsertCraftsman" classname="DBManagerTest" time="0.084"/>
+  <testcase name="DBManagerTest.testValidate" classname="DBManagerTest" time="0.072"/>
+  <testcase name="DBManagerTest.testPriceOrder" classname="DBManagerTest" time="0.008"/>
+  <testcase name="DBManagerTest.testValidate3" classname="DBManagerTest" time="0.078"/>
+  <testcase name="DBManagerTest.testInsertManager" classname="DBManagerTest" time="0.066"/>
+  <testcase name="DBManagerTest.testInsertUser" classname="DBManagerTest" time="0.058"/>
+  <testcase name="DBManagerTest.testValidate2" classname="DBManagerTest" time="0.054"/>
+  <testcase name="DBManagerTest.testUserType" classname="DBManagerTest" time="0.058"/>
+  <testcase name="DBManagerTest.testInsertOrder" classname="DBManagerTest" time="0.262"/>
+</testsuite>

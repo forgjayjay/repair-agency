@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
+
+import com.servlet_project.login.LoginDao;
 public class craftsman_page extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -13,12 +15,19 @@ public class craftsman_page extends HttpServlet {
         PrintWriter out = response.getWriter();  
         
         Cookie cookies[] = request.getCookies();
+        String name ="", pass="";
         if(cookies!=null){
             for(Cookie cookie : cookies ){
                 if(cookie.getName().equals("login")) {
-                    doPost(request, response);
+                    name = cookie.getValue();
+                }
+                if(cookie.getName().equals("pass")) {
+                    pass = cookie.getValue();
                 }
             }
+            LoginDao validator = new LoginDao();
+            if(validator.validate(name, pass) && validator.userType(name).equals("craftsman")) doPost(request, response);
+            else response.sendRedirect(request.getContextPath()+ "/Login");
         } else response.sendRedirect(request.getContextPath()+ "/Login");
         out.close();      
     }

@@ -1,6 +1,6 @@
 package com.servlet_project.login;
 
-import com.servlet_project.dbmanager.dbmanager;
+import com.servlet_project.dbmanager.DBManager;
 
 /*
  * A class for working with Login page and handling 
@@ -9,7 +9,7 @@ import com.servlet_project.dbmanager.dbmanager;
 
 public class LoginDao { 
 
-    dbmanager dbm = dbmanager.getInstance();
+    DBManager dbm = DBManager.getInstance();
 
     public boolean validate(String name,String pass){  
         return dbm.validate(name, pass);

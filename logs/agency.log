@@ -629,3 +629,116 @@ DEBUG   2022-08-27 13:39:45,527 [http-bio-9090-exec-3] com.servlet_project.dbman
 DEBUG   2022-08-27 13:39:45,529 [http-bio-9090-exec-3] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
 DEBUG   2022-08-27 13:39:45,562 [http-bio-9090-exec-3] com.servlet_project.dbmanager.dbmanager  - Looking for orders
 DEBUG   2022-08-27 13:39:45,567 [http-bio-9090-exec-3] com.servlet_project.dbmanager.dbmanager  - Displaying orders
+DEBUG   2022-08-28 21:12:53,004 [http-bio-9090-exec-3] com.servlet_project.dbmanager.dbmanager  - Run validate method
+DEBUG   2022-08-28 21:12:53,019 [http-bio-9090-exec-3] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:12:55,810 [http-bio-9090-exec-3] com.servlet_project.dbmanager.dbmanager  - Checking for user in database
+DEBUG   2022-08-28 21:12:55,871 [http-bio-9090-exec-3] com.servlet_project.dbmanager.dbmanager  - Run userType method
+DEBUG   2022-08-28 21:12:55,872 [http-bio-9090-exec-3] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:12:55,956 [http-bio-9090-exec-3] com.servlet_project.dbmanager.dbmanager  - Checking account type
+DEBUG   2022-08-28 21:12:55,980 [http-bio-9090-exec-4] com.servlet_project.dbmanager.dbmanager  - Run validate method
+DEBUG   2022-08-28 21:12:55,980 [http-bio-9090-exec-4] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:12:56,207 [http-bio-9090-exec-4] com.servlet_project.dbmanager.dbmanager  - Checking for user in database
+DEBUG   2022-08-28 21:13:02,918 [http-bio-9090-exec-5] com.servlet_project.dbmanager.dbmanager  - Run validate method
+DEBUG   2022-08-28 21:13:02,931 [http-bio-9090-exec-5] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:13:03,004 [http-bio-9090-exec-5] com.servlet_project.dbmanager.dbmanager  - Checking for user in database
+DEBUG   2022-08-28 21:13:03,014 [http-bio-9090-exec-5] com.servlet_project.dbmanager.dbmanager  - Run userType method
+DEBUG   2022-08-28 21:13:03,015 [http-bio-9090-exec-5] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:13:03,076 [http-bio-9090-exec-5] com.servlet_project.dbmanager.dbmanager  - Checking account type
+DEBUG   2022-08-28 21:13:10,862 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Run validate method
+DEBUG   2022-08-28 21:13:10,867 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:13:10,952 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Checking for user in database
+DEBUG   2022-08-28 21:13:10,961 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Run userType method
+DEBUG   2022-08-28 21:13:10,969 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:13:11,070 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Checking account type
+DEBUG   2022-08-28 21:13:11,217 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Run validate method
+DEBUG   2022-08-28 21:13:11,223 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:13:11,298 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Checking for user in database
+DEBUG   2022-08-28 21:13:11,308 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Run userType method
+DEBUG   2022-08-28 21:13:11,310 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:13:11,370 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Checking account type
+DEBUG   2022-08-28 21:13:17,088 [http-bio-9090-exec-9] com.servlet_project.dbmanager.dbmanager  - Run validate method
+DEBUG   2022-08-28 21:13:17,094 [http-bio-9090-exec-9] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:13:17,155 [http-bio-9090-exec-9] com.servlet_project.dbmanager.dbmanager  - Checking for user in database
+DEBUG   2022-08-28 21:13:27,332 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run validate method
+DEBUG   2022-08-28 21:13:27,336 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:13:27,404 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Checking for user in database
+DEBUG   2022-08-28 21:13:27,415 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run userType method
+DEBUG   2022-08-28 21:13:27,421 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:13:27,481 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Checking account type
+DEBUG   2022-08-28 21:57:56,377 [http-bio-9090-exec-2] com.servlet_project.dbmanager.dbmanager  - Run validate method
+DEBUG   2022-08-28 21:57:56,383 [http-bio-9090-exec-2] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:57:57,416 [http-bio-9090-exec-2] com.servlet_project.dbmanager.dbmanager  - Checking for user in database
+DEBUG   2022-08-28 21:57:57,461 [http-bio-9090-exec-2] com.servlet_project.dbmanager.dbmanager  - Run userType method
+DEBUG   2022-08-28 21:57:57,462 [http-bio-9090-exec-2] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:57:57,533 [http-bio-9090-exec-2] com.servlet_project.dbmanager.dbmanager  - Checking account type
+DEBUG   2022-08-28 21:57:57,557 [http-bio-9090-exec-3] com.servlet_project.dbmanager.dbmanager  - Run validate method
+DEBUG   2022-08-28 21:57:57,558 [http-bio-9090-exec-3] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:57:57,642 [http-bio-9090-exec-3] com.servlet_project.dbmanager.dbmanager  - Checking for user in database
+DEBUG   2022-08-28 21:59:10,836 [http-bio-9090-exec-5] com.servlet_project.dbmanager.dbmanager  - Run showOrder
+DEBUG   2022-08-28 21:59:10,840 [http-bio-9090-exec-5] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:59:10,906 [http-bio-9090-exec-5] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-28 21:59:10,963 [http-bio-9090-exec-5] com.servlet_project.dbmanager.dbmanager  - Displaying orders
+DEBUG   2022-08-28 21:59:16,315 [http-bio-9090-exec-6] com.servlet_project.dbmanager.dbmanager  - Running getCraftsmanId method
+DEBUG   2022-08-28 21:59:16,316 [http-bio-9090-exec-6] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:59:16,369 [http-bio-9090-exec-6] com.servlet_project.dbmanager.dbmanager  - Looking for order to get assigned craftsman id
+DEBUG   2022-08-28 21:59:16,601 [http-bio-9090-exec-6] com.servlet_project.dbmanager.dbmanager  - Running orderReview method
+DEBUG   2022-08-28 21:59:16,601 [http-bio-9090-exec-6] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:59:16,650 [http-bio-9090-exec-6] com.servlet_project.dbmanager.dbmanager  - Looking for craftsman to see rating
+DEBUG   2022-08-28 21:59:16,678 [http-bio-9090-exec-6] com.servlet_project.dbmanager.dbmanager  - Calculating new rating
+DEBUG   2022-08-28 21:59:16,679 [http-bio-9090-exec-6] com.servlet_project.dbmanager.dbmanager  - Updating craftsman to match new rating
+DEBUG   2022-08-28 21:59:18,111 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Run showOrder
+DEBUG   2022-08-28 21:59:18,112 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:59:18,179 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-28 21:59:18,184 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Displaying orders
+DEBUG   2022-08-28 21:59:22,826 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Run update order payment status method
+DEBUG   2022-08-28 21:59:22,827 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:59:22,880 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-28 21:59:22,889 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Cheking the cost
+DEBUG   2022-08-28 21:59:22,905 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Updating order
+DEBUG   2022-08-28 21:59:22,910 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Changing the cost
+DEBUG   2022-08-28 21:59:22,912 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Inserting id
+DEBUG   2022-08-28 21:59:22,913 [http-bio-9090-exec-8] com.servlet_project.dbmanager.dbmanager  - Executing update
+DEBUG   2022-08-28 21:59:23,941 [http-bio-9090-exec-9] com.servlet_project.dbmanager.dbmanager  - Run showOrder
+DEBUG   2022-08-28 21:59:23,941 [http-bio-9090-exec-9] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:59:23,977 [http-bio-9090-exec-9] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-28 21:59:23,996 [http-bio-9090-exec-9] com.servlet_project.dbmanager.dbmanager  - Displaying orders
+DEBUG   2022-08-28 21:59:25,973 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run showOrder
+DEBUG   2022-08-28 21:59:25,974 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:59:26,019 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-28 21:59:26,027 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Displaying orders
+DEBUG   2022-08-28 21:59:42,627 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run showOrder
+DEBUG   2022-08-28 21:59:42,628 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:59:42,667 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-28 21:59:42,676 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Displaying orders
+DEBUG   2022-08-28 21:59:46,444 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run showOrder
+DEBUG   2022-08-28 21:59:46,444 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:59:46,479 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-28 21:59:46,483 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Displaying orders
+DEBUG   2022-08-28 21:59:49,312 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run showOrder
+DEBUG   2022-08-28 21:59:49,313 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:59:49,359 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-28 21:59:49,365 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Displaying orders
+DEBUG   2022-08-28 21:59:51,996 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run showOrder
+DEBUG   2022-08-28 21:59:51,997 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:59:52,036 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-28 21:59:52,083 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Displaying orders
+DEBUG   2022-08-28 21:59:58,095 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Run showOrder
+DEBUG   2022-08-28 21:59:58,096 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 21:59:58,136 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-28 21:59:58,141 [http-bio-9090-exec-10] com.servlet_project.dbmanager.dbmanager  - Displaying orders
+DEBUG   2022-08-28 22:02:19,835 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Run showOrder
+DEBUG   2022-08-28 22:02:19,836 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 22:02:19,885 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-28 22:02:19,894 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Displaying orders
+DEBUG   2022-08-28 22:02:21,995 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Run update order payment status method
+DEBUG   2022-08-28 22:02:21,998 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 22:02:22,034 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-28 22:02:22,037 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Cheking the cost
+DEBUG   2022-08-28 22:02:22,038 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Updating order
+DEBUG   2022-08-28 22:02:22,038 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Changing the cost
+DEBUG   2022-08-28 22:02:22,039 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Inserting id
+DEBUG   2022-08-28 22:02:22,039 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Executing update
+DEBUG   2022-08-28 22:02:23,932 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Run showOrder
+DEBUG   2022-08-28 22:02:23,933 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Acquiring url to database
+DEBUG   2022-08-28 22:02:23,968 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Looking for orders
+DEBUG   2022-08-28 22:02:23,972 [http-bio-9090-exec-7] com.servlet_project.dbmanager.dbmanager  - Displaying orders

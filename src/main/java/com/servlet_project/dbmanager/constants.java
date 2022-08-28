@@ -6,8 +6,8 @@ package com.servlet_project.dbmanager;
 *       with understanding what the code is supposed to do
 */
 
-public class constants {
-    private constants() {}
+public class Constants {
+    private Constants() {}
 	public static final String SETTINGS_FILE = "dbconnection.properties";
 	public static final String VALIDATE_USER = "select * from users where login = ? and passwrd = ?";
 	public static final String FIND_USER = "select * from users where login = ?";
@@ -18,7 +18,7 @@ public class constants {
 	public static final String UPDATE_ORDER_REVIEW = "update orders set reviewed = true where id = ?";
 
 	public static final String UPDATE_ORDER_PAYMENT = "update orders set payment_status = '"
-	+constants.PAID_STATUS +"' , cost = ? where id = ?";
+	+Constants.PAID_STATUS +"' , cost = ? where id = ?";
 	public static final String UPDATE_CRAFTSMAN_RATING = "update craftsmen set rating = ? , review_number = ? where id = ?";
 
 
@@ -35,7 +35,7 @@ public class constants {
 	public static final String SHOW_ORDER = "select * from orders where id = ?";
 	public static final String SHOW_ORDER_CRFTSMN = "select * from orders where craftsman_id = ?";
 	public static final String SHOW_NOT_PAID_ORDER = "select * from orders where user_id = "
-	+"? and payment_status = '"	+ constants.UNPAID_STATUS+"'";
+	+"? and payment_status = '"	+ Constants.UNPAID_STATUS+"'";
 
 	public static final String PAID_STATUS = "payment successful";
 	public static final String UNPAID_STATUS = "waiting payment";

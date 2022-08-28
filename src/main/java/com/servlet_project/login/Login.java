@@ -37,20 +37,23 @@ public class Login extends HttpServlet{
 
     String name=request.getParameter("username");  
     String pass=request.getParameter("userpass"); 
-    Cookie cookies[] = request.getCookies();
+    //Cookie cookies[] = request.getCookies();
         
-    for (Cookie cookie : cookies) {
-        if(cookie.getName().equals("login")) {
-            cookie = new Cookie("login", name);
-            cookie.setValue(name);
-        }
-    } 
+    // for (Cookie cookie : cookies) {
+    //     if(cookie.getName().equals("login")) {
+    //         cookie = new Cookie("login", name);
+    //         cookie.setValue(name);
+    //     }
+    // } 
     LoginDao validator = new LoginDao();
     if(validator.validate(name, pass)){ 
         
         String redirectStr = validator.userType(name);
         Cookie loginCookie = new Cookie("login", name);
+        Cookie passCookie = new Cookie("pass", pass);
+
         response.addCookie(loginCookie);
+        response.addCookie(passCookie);
         response.sendRedirect(request.getContextPath() +"/"+ redirectStr+ "_page");
           
     }  

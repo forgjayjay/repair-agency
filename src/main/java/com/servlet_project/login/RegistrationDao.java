@@ -1,6 +1,6 @@
 package com.servlet_project.login;
 
-import com.servlet_project.dbmanager.dbmanager;
+import com.servlet_project.dbmanager.DBManager;
 
 /*
  * A class for working with Registration page and handling 
@@ -9,7 +9,7 @@ import com.servlet_project.dbmanager.dbmanager;
 
 public class RegistrationDao {  
 public boolean insert(String name,String pass){  
-        dbmanager dbm = dbmanager.getInstance();
+        DBManager dbm = DBManager.getInstance();
         return dbm.insertUser(name, pass);
     }
 }  

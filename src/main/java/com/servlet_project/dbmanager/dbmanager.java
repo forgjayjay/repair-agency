@@ -16,23 +16,23 @@ import org.apache.log4j.Logger;
  * A class for working with Database
 */
 
-public class dbmanager {
+public class DBManager {
 
-    private static dbmanager instance;
+    private static DBManager instance;
     private final Logger logger = Logger.getLogger(
         this.getClass()
     );
     
 
-	private dbmanager() {
+	private DBManager() {
         
 	}
 
-	public static synchronized dbmanager getInstance() {
+	public static synchronized DBManager getInstance() {
 
 		if (instance == null) {
             
-			instance = new dbmanager();
+			instance = new DBManager();
 		}
 		return instance;
 	}
@@ -46,7 +46,7 @@ public class dbmanager {
             Connection con = DriverManager.getConnection(getUrlToDB());
         ){  
             logger.debug("Looking if user already exists");
-            PreparedStatement ps = con.prepareStatement(constants.FIND_USER);
+            PreparedStatement ps = con.prepareStatement(Constants.FIND_USER);
             ps.setString(1,name);
             ResultSet rs = ps.executeQuery();  
             if( status=rs.next()){
@@ -54,7 +54,7 @@ public class dbmanager {
             }
             logger.debug("Inserting new user into system");
             ps = con.prepareStatement(
-                constants.INSERT_USER
+                Constants.INSERT_USER
             );  
             ps.setString(1,name);  
             ps.setString(2,pass);  
@@ -78,12 +78,13 @@ public class dbmanager {
         ){  
             logger.debug("Looking if manager already exists");
 
-            PreparedStatement ps = con.prepareStatement(constants.FIND_USER);
+            PreparedStatement ps = con.prepareStatement(Constants.FIND_USER);
             ps.setString(1,name);
             ResultSet rs = ps.executeQuery();  
             if( status=rs.next()){
+                if(rs.getString("login").equals("admin")) return false;
                 logger.debug("Updating the existing user to be manager");
-                ps = con.prepareStatement(constants.UPDATE_USER);
+                ps = con.prepareStatement(Constants.UPDATE_USER);
                 ps.setString(1, "manager"); 
                 ps.setString(2,name); 
                 ps.executeUpdate(); 
@@ -98,7 +99,7 @@ public class dbmanager {
             ps.close();
             logger.debug("Inserting manager into database");
             ps = con.prepareStatement(
-                constants.INSERT_MNGR
+                Constants.INSERT_MNGR
             );  
             ps.setString(1,name);  
             ps.setString(2,pass);  
@@ -121,19 +122,20 @@ public class dbmanager {
             Connection con = DriverManager.getConnection(getUrlToDB());
         ){  
             logger.debug("Looking if craftsman already exists");
-            PreparedStatement ps = con.prepareStatement(constants.FIND_USER);
+            PreparedStatement ps = con.prepareStatement(Constants.FIND_USER);
             ps.setString(1,login);
 
             ResultSet rs = ps.executeQuery();  
             if( status=rs.next()){
+                if(rs.getString("login").equals("admin")) return false;
                 logger.debug("Updating the existing user to be craftsman");
                 newID = rs.getInt(1);
-                ps = con.prepareStatement(constants.UPDATE_USER);
+                ps = con.prepareStatement(Constants.UPDATE_USER);
                 ps.setString(1, "craftsman"); 
                 ps.setString(2,login); 
                 ps.executeUpdate(); 
                 logger.debug("Adding the existing user to craftsman list");
-                ps = con.prepareStatement(constants.INSERT_INTO_CRFTSMN);
+                ps = con.prepareStatement(Constants.INSERT_INTO_CRFTSMN);
                 ps.setInt(1, newID);
                 ps.setString(2, name);
                 i += ps.executeUpdate();  
@@ -149,7 +151,7 @@ public class dbmanager {
 
             logger.debug("Inserting craftsman into database");
             ps = con.prepareStatement(
-                constants.INSERT_CRFTSMN
+                Constants.INSERT_CRFTSMN
             );  
             ps.setString(1,login);  
             ps.setString(2,pass);  
@@ -157,7 +159,7 @@ public class dbmanager {
             i += ps.executeUpdate(); 
            
             logger.debug("Adding new craftsman to craftsman list");
-            ps = con.prepareStatement(constants.FIND_USER);
+            ps = con.prepareStatement(Constants.FIND_USER);
             ps.setString(1,login);
             rs = ps.executeQuery(); 
 
@@ -165,7 +167,7 @@ public class dbmanager {
                 newID = rs.getInt(1);
             }
 
-            ps = con.prepareStatement(constants.INSERT_INTO_CRFTSMN);
+            ps = con.prepareStatement(Constants.INSERT_INTO_CRFTSMN);
             ps.setInt(1, newID);
             ps.setString(2, name);
             i += ps.executeUpdate();
@@ -188,7 +190,7 @@ public class dbmanager {
             Connection con = DriverManager.getConnection(getUrlToDB());
         ){  
             logger.debug("Updating order");
-            PreparedStatement ps = con.prepareStatement(constants.UPDATE_ORDER_CRFTSMN);
+            PreparedStatement ps = con.prepareStatement(Constants.UPDATE_ORDER_CRFTSMN);
             ps.setInt(1,craftsmanID);
             ps.setInt(2,orderID);
 
@@ -205,14 +207,20 @@ public class dbmanager {
     }
     public boolean priceOrder(Double cost, int orderID){  
         logger.debug("Run priceOrder method");
-
+        if(orderID<0) return false;
         boolean status=false; 
         int i = 0;
         try(
             Connection con = DriverManager.getConnection(getUrlToDB());
         ){  
+            PreparedStatement ps = con.prepareStatement(Constants.SHOW_ORDER);
+            ps.setInt(1, orderID);
+            ResultSet rs = ps.executeQuery();
+            if(!rs.next()){
+                return false;
+            }
             logger.debug("Updating order");
-            PreparedStatement ps = con.prepareStatement(constants.UPDATE_ORDER_PRICE);
+            ps = con.prepareStatement(Constants.UPDATE_ORDER_PRICE);
             ps.setDouble(1,cost);
             ps.setInt(2,orderID);
 
@@ -238,7 +246,7 @@ public class dbmanager {
         ){  
             logger.debug("Looking for user id to add to order");
             int userID = 0;
-            PreparedStatement ps = con.prepareStatement(constants.FIND_USER);
+            PreparedStatement ps = con.prepareStatement(Constants.FIND_USER);
             ps.setString(1,name);
             ResultSet rs = ps.executeQuery(); 
             if(!rs.next()){
@@ -251,11 +259,11 @@ public class dbmanager {
             ps.close();
             logger.debug("Inserting order into database");
             ps = con.prepareStatement(
-                constants.INSERT_NEW_ORDER
+                Constants.INSERT_NEW_ORDER
             );  
             ps.setInt(1,userID);
-            ps.setString(2, constants.ORDER_STATUS_ACCEPT);  
-            ps.setString(3,constants.UNPAID_STATUS);  
+            ps.setString(2, Constants.ORDER_STATUS_ACCEPT);  
+            ps.setString(3,Constants.UNPAID_STATUS);  
         
             i += ps.executeUpdate();  
             status = i > 0;
@@ -277,7 +285,7 @@ public class dbmanager {
             Connection con = DriverManager.getConnection(getUrlToDB());
         ){  
             logger.debug("Looking for orders");
-            PreparedStatement ps = con.prepareStatement(constants.FIND_USER);
+            PreparedStatement ps = con.prepareStatement(Constants.FIND_USER);
             ps.setString(1,name);
              rs = ps.executeQuery();  
             if( rs.next()){
@@ -286,9 +294,9 @@ public class dbmanager {
             ps.close();
             String statement = "";
             if(type.equals("all")){
-                statement = constants.SHOW_ALL_ORDERS;
+                statement = Constants.SHOW_ALL_ORDERS;
             }else {
-                statement = constants.SHOW_NOT_PAID_ORDER;
+                statement = Constants.SHOW_NOT_PAID_ORDER;
             }
             ps = con.prepareStatement(
                 statement
@@ -305,7 +313,7 @@ public class dbmanager {
                 id = rs.getInt("id");
                 cost = rs.getDouble("cost");
                 reviewed = rs.getBoolean("reviewed");
-                completed = rs.getString(4).equals(constants.ORDER_STATUS_DONE);
+                completed = rs.getString(4).equals(Constants.ORDER_STATUS_DONE);
                 str = " <br />Order number: " + id + "";
                 str += " <br />Order status: " + rs.getString("order_status")+"";
                 str += " <br />Payment status: " + rs.getString("payment_status") + "";
@@ -335,8 +343,8 @@ public class dbmanager {
             logger.debug("Looking for orders");
             String statement = "";
             if(type.equals("ASC")){
-                statement = constants.SHOW_MANAGER_ORDERS_ASC;
-            }else statement = constants.SHOW_MANAGER_ORDERS_DESC;
+                statement = Constants.SHOW_MANAGER_ORDERS_ASC;
+            }else statement = Constants.SHOW_MANAGER_ORDERS_DESC;
             PreparedStatement ps = con.prepareStatement(
                 statement
             );  
@@ -352,7 +360,7 @@ public class dbmanager {
                 id = rs.getInt("id");
                 cost = rs.getDouble("cost");
                 reviewed = rs.getBoolean("reviewed");
-                completed = rs.getString(4).equals(constants.ORDER_STATUS_DONE);
+                completed = rs.getString(4).equals(Constants.ORDER_STATUS_DONE);
                 str = " <br />Order number: " + id + "";
                 str += " <br />User: " + Integer.toString(rs.getInt("user_id"))+"";
                 if(rs.getInt("craftsman_id") == 1) str += " \nCraftsman: " + craftsman_unassigned+"\n";
@@ -380,7 +388,7 @@ public class dbmanager {
             Connection con = DriverManager.getConnection(getUrlToDB());
         ){  
             logger.debug("Looking for orders");
-            PreparedStatement ps = con.prepareStatement(constants.FIND_USER);
+            PreparedStatement ps = con.prepareStatement(Constants.FIND_USER);
             ps.setString(1,name);
              rs = ps.executeQuery();  
             if( rs.next()){
@@ -389,7 +397,7 @@ public class dbmanager {
             ps.close();
             
             ps = con.prepareStatement(
-                constants.SHOW_ORDER_CRFTSMN
+                Constants.SHOW_ORDER_CRFTSMN
             );  
             ps.setInt(1, userID);
             
@@ -434,7 +442,7 @@ public class dbmanager {
             logger.debug("Looking for order");
 
             PreparedStatement ps = con.prepareStatement(
-                constants.SHOW_ORDER
+                Constants.SHOW_ORDER
             );
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();  
@@ -444,7 +452,7 @@ public class dbmanager {
             ps.close();
             logger.debug("Looking if craftsman is assigned to current order");
             ps = con.prepareStatement(
-                constants.FIND_USER
+                Constants.FIND_USER
             );
             ps.setString(1, name);
             logger.debug("Executing the search");
@@ -454,7 +462,7 @@ public class dbmanager {
             } else return false;
             if(currentID != craftsmanID) return false;
             logger.debug("Updating order");
-            ps = con.prepareStatement(constants.UPDATE_ORDER_STATUS);
+            ps = con.prepareStatement(Constants.UPDATE_ORDER_STATUS);
             ps.setString(1, order_status);
             ps.setInt(2, id);
             i += ps.executeUpdate();  
@@ -475,7 +483,7 @@ public class dbmanager {
         ){  
             logger.debug("Looking for orders");
             PreparedStatement ps = con.prepareStatement(
-                constants.SHOW_ORDER
+                Constants.SHOW_ORDER
             );
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();  
@@ -490,7 +498,7 @@ public class dbmanager {
             ps.close();
             logger.debug("Updating order");
             ps = con.prepareStatement(
-                constants.UPDATE_ORDER_PAYMENT
+                Constants.UPDATE_ORDER_PAYMENT
             );
             logger.debug("Changing the cost");
             ps.setDouble(1, updatedCost);
@@ -515,7 +523,7 @@ public class dbmanager {
             Connection con = DriverManager.getConnection(getUrlToDB());
         ) {
             logger.debug("Looking for craftsman to see rating");
-            PreparedStatement ps = con.prepareStatement(constants.SHOW_CRAFTSMAN);
+            PreparedStatement ps = con.prepareStatement(Constants.SHOW_CRAFTSMAN);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
@@ -529,7 +537,7 @@ public class dbmanager {
             rating/=review_number;
             
             logger.debug("Updating craftsman to match new rating");
-            ps = con.prepareStatement(constants.UPDATE_CRAFTSMAN_RATING);
+            ps = con.prepareStatement(Constants.UPDATE_CRAFTSMAN_RATING);
             ps.setDouble(1, rating);
             ps.setInt(2, review_number);
             ps.setInt(3, id);
@@ -548,13 +556,13 @@ public class dbmanager {
             Connection con = DriverManager.getConnection(getUrlToDB());
         ) {
             logger.debug("Looking for order to get assigned craftsman id");
-            PreparedStatement ps = con.prepareStatement(constants.SHOW_ORDER);
+            PreparedStatement ps = con.prepareStatement(Constants.SHOW_ORDER);
             ps.setInt(1, orderID);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 craftsmanID = rs.getInt(3);
             }
-            ps = con.prepareStatement(constants.UPDATE_ORDER_REVIEW);
+            ps = con.prepareStatement(Constants.UPDATE_ORDER_REVIEW);
             ps.setInt(1, orderID);
             ps.executeUpdate();
         } catch (Exception e) {
@@ -568,7 +576,7 @@ public class dbmanager {
         String type = "";
         try(
             Connection con=DriverManager.getConnection(getUrlToDB());
-            PreparedStatement ps=con.prepareStatement(constants.FIND_USER);
+            PreparedStatement ps=con.prepareStatement(Constants.FIND_USER);
         ){  
             logger.debug("Checking account type");
             ps.setString(1,name);  
@@ -589,7 +597,7 @@ public class dbmanager {
         boolean status=false;  
         try(
             Connection con=DriverManager.getConnection(getUrlToDB());
-            PreparedStatement ps=con.prepareStatement(constants.VALIDATE_USER);
+            PreparedStatement ps=con.prepareStatement(Constants.VALIDATE_USER);
         ){  
 
             logger.debug("Checking for user in database");
@@ -609,7 +617,7 @@ public class dbmanager {
     private String getUrlToDB() {
         String url = null;
         logger.debug("Acquiring url to database");
-        try (InputStream in = new FileInputStream(constants.SETTINGS_FILE)) {
+        try (InputStream in = new FileInputStream(Constants.SETTINGS_FILE)) {
             Properties prop = new Properties();
             prop.load(in);
             url =prop.getProperty("connection.url");

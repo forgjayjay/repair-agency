@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 import com.servlet_project.dbmanager.Order;
+import com.servlet_project.login.LoginDao;
 
 public class user_order_handler extends HttpServlet {
     @Override
@@ -19,9 +20,21 @@ public class user_order_handler extends HttpServlet {
         response.setContentType("text/html");  
         PrintWriter out = response.getWriter();  
               
-        out.print("Please, login first");  
-        RequestDispatcher rd=request.getRequestDispatcher("login_page.jsp");  
-        rd.include(request,response);    
+        Cookie cookies[] = request.getCookies();
+        String name ="", pass="";
+        if(cookies!=null){
+            for(Cookie cookie : cookies ){
+                if(cookie.getName().equals("login")) {
+                    name = cookie.getValue();
+                }
+                if(cookie.getName().equals("pass")) {
+                    pass = cookie.getValue();
+                }
+            }
+            LoginDao validator = new LoginDao();
+            if(validator.validate(name, pass)) doPost(request, response);
+            else response.sendRedirect(request.getContextPath()+ "/Login");
+        } else response.sendRedirect(request.getContextPath()+ "/Login");   
               
         out.close();      
     }
@@ -61,15 +74,7 @@ public class user_order_handler extends HttpServlet {
             out.println("Your orders: \n<br />");
             out.println();
             HashMap<Order, String> orderMap =  userDao.showOrders(name);
-            for (String string : orderMap.values()) {
-                out.println(string + "<br />");
-                out.println();
-            }
-        }
-        if(request.getParameter("showorder_payment")!= null){
-            out.println("Your unpaid orders: <br />");
-            out.println();
-            HashMap<Order, String> orderMap =  userDao.showUnpaidOrders(name);
+            RequestDispatcher orderDispatcher;
             for (Map.Entry<Order, String> order : orderMap.entrySet()) {
                 out.println(order.getValue());
                 request.setAttribute("orderID", order.getKey());
@@ -77,7 +82,26 @@ public class user_order_handler extends HttpServlet {
                 this.getServletConfig()
                     .getServletContext()
                     .setAttribute("orderID",  order.getKey());
-                RequestDispatcher orderDispatcher = request.getRequestDispatcher("paymentObject.jsp");
+                if(!order.getKey().isReviewed() && order.getKey().getCompleted()){
+                    orderDispatcher = request.getRequestDispatcher("reviewCraftsman.jsp");
+                    orderDispatcher.include(request, response);
+                }
+                out.println("<br /><br />");
+            }  
+        }
+        if(request.getParameter("showorder_payment")!= null){
+            out.println("Your unpaid orders: <br />");
+            out.println();
+            HashMap<Order, String> orderMap =  userDao.showUnpaidOrders(name);
+            RequestDispatcher orderDispatcher;
+            for (Map.Entry<Order, String> order : orderMap.entrySet()) {
+                out.println(order.getValue());
+                request.setAttribute("orderID", order.getKey());
+                request.getSession().setAttribute("orderID", order.getKey());
+                this.getServletConfig()
+                    .getServletContext()
+                    .setAttribute("orderID",  order.getKey());
+                orderDispatcher = request.getRequestDispatcher("paymentObject.jsp");
                 orderDispatcher.include(request, response); 
                 if(!order.getKey().isReviewed() && order.getKey().getCompleted()){
                     orderDispatcher = request.getRequestDispatcher("reviewCraftsman.jsp");
