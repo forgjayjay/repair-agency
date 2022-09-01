@@ -10,6 +10,22 @@ import com.servlet_project.dbmanager.DBManager;
 public class RegistrationDao {  
 public boolean insert(String name,String pass){  
         DBManager dbm = DBManager.getInstance();
-        return dbm.insertUser(name, pass);
+        int count = 0; 
+        boolean status = false;
+        name = name.trim();
+        pass = pass.trim();
+        if(name.contains(" ") || pass.contains(" ")) return status;
+        if( 6 <= pass.length() && pass.length() <= 20  ){
+            if( pass.matches(".*\\d.*") ){
+                count ++;
+            }if( pass.matches(".*[a-z].*") ){
+                count ++;
+            }if( pass.matches(".*[A-Z].*") ){
+                count ++;
+            }
+            if(count>1) status = dbm.insertUser(name, pass);
+            return status;
+        }
+        return status;
     }
 }  

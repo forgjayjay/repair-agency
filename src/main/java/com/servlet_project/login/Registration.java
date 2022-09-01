@@ -37,8 +37,6 @@ public class Registration extends HttpServlet{
         out.print("Account successfully created, you will be redirected to login page soon");  
         RequestDispatcher rd=request.getRequestDispatcher("login_page.jsp");  
         rd.include(request, response); 
-        
-        //response.sendRedirect(request.getContextPath() + "/Login");
     }  
     else{  
         out.print("Sorry username already exists");  

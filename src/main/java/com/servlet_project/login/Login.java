@@ -37,14 +37,6 @@ public class Login extends HttpServlet{
 
     String name=request.getParameter("username");  
     String pass=request.getParameter("userpass"); 
-    //Cookie cookies[] = request.getCookies();
-        
-    // for (Cookie cookie : cookies) {
-    //     if(cookie.getName().equals("login")) {
-    //         cookie = new Cookie("login", name);
-    //         cookie.setValue(name);
-    //     }
-    // } 
     LoginDao validator = new LoginDao();
     if(validator.validate(name, pass)){ 
         

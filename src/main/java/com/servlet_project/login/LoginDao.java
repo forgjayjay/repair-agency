@@ -11,7 +11,9 @@ public class LoginDao {
 
     DBManager dbm = DBManager.getInstance();
 
-    public boolean validate(String name,String pass){  
+    public boolean validate(String name,String pass){ 
+        name = name.trim();
+        pass = pass.trim();
         return dbm.validate(name, pass);
     } 
 
