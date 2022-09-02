@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Account page</title>
+        
     </head>
     <body>
         <h2></h2>
