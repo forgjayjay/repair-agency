@@ -15,14 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 public class Registration extends HttpServlet{
     public void doGet(HttpServletRequest request, HttpServletResponse response)  
         throws ServletException, IOException {  
-  
-    response.setContentType("text/html");  
-    PrintWriter out = response.getWriter();  
+
+    doPost(request, response);
           
-    RequestDispatcher rd=request.getRequestDispatcher("registration_page.jsp");  
-    rd.include(request,response);  
-          
-    out.close();  
     }  
     public void doPost(HttpServletRequest request, HttpServletResponse response)  
         throws ServletException, IOException {  
@@ -32,14 +27,15 @@ public class Registration extends HttpServlet{
           
     String n=request.getParameter("username");  
     String p=request.getParameter("userpass");  
+    String p2=request.getParameter("userpass2");  
     RegistrationDao validator = new RegistrationDao();
-    if(validator.insert(n, p)){  
+    if(validator.insert(n, p, p2)){  
         out.print("Account successfully created, you will be redirected to login page soon");  
         RequestDispatcher rd=request.getRequestDispatcher("login_page.jsp");  
         rd.include(request, response); 
     }  
     else{  
-        out.print("Sorry username already exists");  
+        out.print("Sorry username already exists or the passwords don't match!");
         RequestDispatcher rd=request.getRequestDispatcher("registration_page.jsp");  
         rd.include(request,response);  
     }  
