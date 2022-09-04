@@ -64,6 +64,7 @@ public class DBManager {
             }catch(Exception e){ 
                 logger.error("Error on insertUser"); 
                 logger.error(e);
+                System.out.println(e);
             } 
         return status;  
     }
@@ -159,14 +160,14 @@ public class DBManager {
             i += ps.executeUpdate(); 
            
             logger.debug("Adding new craftsman to craftsman list");
-            ps = con.prepareStatement(Constants.FIND_USER);
-            ps.setString(1,login);
-            rs = ps.executeQuery(); 
+            // ps = con.prepareStatement(Constants.FIND_USER);
+            // ps.setString(1,login);
+            // rs = ps.executeQuery(); 
 
-            while(rs.next()){
-                newID = rs.getInt(1);
-            }
-
+            // while(rs.next()){
+            //     newID = rs.getInt(1);
+            // }
+            newID = userId(login);
             ps = con.prepareStatement(Constants.INSERT_INTO_CRFTSMN);
             ps.setInt(1, newID);
             ps.setString(2, name);
@@ -246,19 +247,20 @@ public class DBManager {
         ){  
             logger.debug("Looking for user id to add to order");
             int userID = 0;
-            PreparedStatement ps = con.prepareStatement(Constants.FIND_USER);
-            ps.setString(1,name);
-            ResultSet rs = ps.executeQuery(); 
-            if(!rs.next()){
-                return false;
-            } else{
-                do{
-                    userID=rs.getInt(1);
-                } while(rs.next());
-            }
-            ps.close();
+            // PreparedStatement ps = con.prepareStatement(Constants.FIND_USER);
+            // ps.setString(1,name);
+            // ResultSet rs = ps.executeQuery(); 
+            // if(!rs.next()){
+            //     return false;
+            // } else{
+            //     do{
+            //         userID=rs.getInt(1);
+            //     } while(rs.next());
+            // }
+            //ps.close();
+            userID = userId(name);
             logger.debug("Inserting order into database");
-            ps = con.prepareStatement(
+            PreparedStatement ps = con.prepareStatement(
                 Constants.INSERT_NEW_ORDER
             );  
             ps.setInt(1,userID);
@@ -285,20 +287,21 @@ public class DBManager {
             Connection con = DriverManager.getConnection(getUrlToDB());
         ){  
             logger.debug("Looking for orders");
-            PreparedStatement ps = con.prepareStatement(Constants.FIND_USER);
-            ps.setString(1,name);
-             rs = ps.executeQuery();  
-            if( rs.next()){
-                userID = rs.getInt(1);
-            } else return new LinkedHashMap<>();
-            ps.close();
+            //PreparedStatement ps = con.prepareStatement(Constants.FIND_USER);
+            // ps.setString(1,name);
+            //  rs = ps.executeQuery();  
+            // if( rs.next()){
+            //     userID = rs.getInt(1);
+            // } else return new LinkedHashMap<>();
+            //ps.close();
+            userID = userId(name);
             String statement = "";
             if(type.equals("all")){
                 statement = Constants.SHOW_ALL_ORDERS;
             }else {
                 statement = Constants.SHOW_NOT_PAID_ORDER;
             }
-            ps = con.prepareStatement(
+            PreparedStatement ps = con.prepareStatement(
                 statement
             );  
             ps.setInt(1, userID);
@@ -388,15 +391,15 @@ public class DBManager {
             Connection con = DriverManager.getConnection(getUrlToDB());
         ){  
             logger.debug("Looking for orders");
-            PreparedStatement ps = con.prepareStatement(Constants.FIND_USER);
-            ps.setString(1,name);
-             rs = ps.executeQuery();  
-            if( rs.next()){
-                userID = rs.getInt(1);
-            } else return new LinkedHashMap<>();
-            ps.close();
-            
-            ps = con.prepareStatement(
+            // PreparedStatement ps = con.prepareStatement(Constants.FIND_USER);
+            // ps.setString(1,name);
+            //  rs = ps.executeQuery();  
+            // if( rs.next()){
+            //     userID = rs.getInt(1);
+            // } else return new LinkedHashMap<>();
+            // ps.close();
+            userID = userId(name);
+            PreparedStatement ps = con.prepareStatement(
                 Constants.SHOW_ORDER_CRFTSMN
             );  
             ps.setInt(1, userID);
@@ -451,15 +454,16 @@ public class DBManager {
             } else return false;
             ps.close();
             logger.debug("Looking if craftsman is assigned to current order");
-            ps = con.prepareStatement(
-                Constants.FIND_USER
-            );
-            ps.setString(1, name);
-            logger.debug("Executing the search");
-            rs = ps.executeQuery();
-            if( rs.next()){
-                currentID = rs.getInt(1);
-            } else return false;
+            // ps = con.prepareStatement(
+            //     Constants.FIND_USER
+            // );
+            // ps.setString(1, name);
+            // logger.debug("Executing the search");
+            // rs = ps.executeQuery();
+            // if( rs.next()){
+            //     currentID = rs.getInt(1);
+            // } else return false;
+            currentID = userId(name);
             if(currentID != craftsmanID) return false;
             logger.debug("Updating order");
             ps = con.prepareStatement(Constants.UPDATE_ORDER_STATUS);
@@ -592,6 +596,49 @@ public class DBManager {
         }  
         return type;
     }
+
+    public int userId(String name){
+        logger.debug("Run userId method");
+        int id = 0;
+        try(
+            Connection con=DriverManager.getConnection(getUrlToDB());
+            PreparedStatement ps=con.prepareStatement(Constants.FIND_USER);
+        ){  
+            logger.debug("Checking account id");
+            ps.setString(1,name);  
+            ResultSet rs=ps.executeQuery(); 
+            while(rs.next()){
+                id = rs.getInt("id");
+            }
+        } catch(Exception e){ 
+            logger.error(e); 
+
+            logger.debug("Error on userId"); 
+        
+        }  
+        return id;
+    }
+    public int orderID(String name){
+        logger.debug("Run userId method");
+        int id = 0;
+        try(
+            Connection con=DriverManager.getConnection(getUrlToDB());
+            PreparedStatement ps=con.prepareStatement(Constants.FIND_USER);
+        ){  
+            logger.debug("Checking account id");
+            ps.setString(1,name);  
+            ResultSet rs=ps.executeQuery(); 
+            while(rs.next()){
+                id = rs.getInt("id");
+            }
+        } catch(Exception e){ 
+            logger.error(e); 
+
+            logger.debug("Error on userId"); 
+        
+        }  
+        return id;
+    }
     public boolean validate(String name,String pass){
         logger.debug("Run validate method");  
         boolean status=false;  
@@ -613,6 +660,8 @@ public class DBManager {
         }  
         return status;  
     } 
+
+
 
     private String getUrlToDB() {
         String url = null;
