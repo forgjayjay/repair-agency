@@ -12,3 +12,5 @@
 > HTML to create temlates for servlets.
 
 > CSS to make styling for HMTL templates.
+
+> log4j 2 for logging.
